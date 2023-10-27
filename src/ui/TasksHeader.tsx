@@ -1,9 +1,9 @@
 import iconVertical from "/assets/icon-vertical-ellipsis.svg";
 const TasksHeader = () => {
   return (
-    <header className="p-7 bg-white flex items-center justify-between">
-      <h3 className="font-bold">Platform Launch</h3>
-      <div className="flex items-center gap-5">
+    <div className="w-full flex items-center justify-between">
+      <h4 className="font-bold ml-12">Platform Launch</h4>
+      <div className="flex items-center gap-5 mr-5">
         <button
           className="capitalize bg-mediumPurple text-white p-[10px]
          rounded-3xl font-bold hover:opacity-75 transition-opacity ease-in duration-150"
@@ -18,7 +18,7 @@ const TasksHeader = () => {
           />
         </button>
       </div>
-    </header>
+    </div>
   );
 };
 export default TasksHeader;
