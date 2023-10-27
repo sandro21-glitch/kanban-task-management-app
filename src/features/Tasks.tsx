@@ -1,10 +1,17 @@
-import TasksHeader from "../ui/TasksHeader";
+// import { useTasksContext } from "../context/TasksContext";
 
-const Tasks = () => {
+type Sidebar = {
+  isSidebarOpen: boolean;
+};
+const Tasks = ({ isSidebarOpen }: Sidebar) => {
+  // const { state } = useTasksContext();
+  // const { allTask } = state;
   return (
-    <article className="bg-boardColor ml-[261px] h-screen">
-      <TasksHeader />
-    </article>
+    <article
+      className={`bg-boardColor ${
+        isSidebarOpen ? "ml-[261px]" : "ml-[0px]"
+      } py-[104px] px-5 h-screen`}
+    >test</article>
   );
 };
 export default Tasks;
