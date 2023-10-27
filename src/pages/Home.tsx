@@ -1,9 +1,11 @@
 import Tasks from "../features/Tasks";
-
-const Home = () => {
+type Sidebar = {
+  isSidebarOpen: boolean;
+};
+const Home = ({ isSidebarOpen }: Sidebar) => {
   return (
     <section className=" w-full">
-      <Tasks />
+      <Tasks isSidebarOpen={isSidebarOpen} />
     </section>
   );
 };
