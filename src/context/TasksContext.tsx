@@ -11,12 +11,23 @@ type TasksContextType = {
 const TasksProvider = createContext<TasksContextType | null>(null);
 
 const initialState = {
-  allTask: [{ name: "test" }],
+  allTask: [
+    {
+      boardName: "test",
+      todos: [
+        {
+          todoName: "test",
+          status: "todo",
+        },
+      ],
+      subtasks: [{ task: "test", completed: false }],
+    },
+  ],
 };
 
 const TasksContext: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(tasksReducer, initialState);
-  console.log('test')
+  console.log(state);
   return (
     <TasksProvider.Provider value={{ state, dispatch }}>
       {children}
