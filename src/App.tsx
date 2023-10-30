@@ -6,16 +6,20 @@ import CreateNewBoard from "./features/forms/CreateNewBoard";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
-
+  const [openBoardForm, setOpenBoardForm] = useState<boolean>(false);
   return (
-    <main className="flex">
+    <main>
       <Navbar />
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
+        setOpenBoardForm={setOpenBoardForm}
       />
       <Home isSidebarOpen={isSidebarOpen} />
-      <CreateNewBoard />
+      <CreateNewBoard
+        openBoardForm={openBoardForm}
+        setOpenBoardForm={setOpenBoardForm}
+      />
     </main>
   );
 }
