@@ -1,8 +1,13 @@
+import { useTasksContext } from "../context/TasksContext";
 import iconVertical from "/assets/icon-vertical-ellipsis.svg";
 const TasksHeader = () => {
+  const { state } = useTasksContext();
+  const { board, activeBoard } = state;
+
+  if(activeBoard == null) return
   return (
     <div className="w-full flex items-center justify-between">
-      <h4 className="font-bold ml-12">Platform Launch</h4>
+      <h4 className="font-bold ml-12">{board[activeBoard].boardName}</h4>
       <div className="flex items-center gap-5 mr-5">
         <button
           className="capitalize bg-mediumPurple text-white p-[10px]
