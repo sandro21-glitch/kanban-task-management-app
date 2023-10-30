@@ -1,25 +1,38 @@
+import { useState } from "react";
+import { useTasksContext } from "../context/TasksContext";
 import Button from "./Button";
 import CreateBoardBtn from "./CreateBoardBtn";
 import boardIcon from "/assets/board-icon.svg";
-
-const SidebarList = () => {
+type SidebarType = {
+  setOpenBoardForm: (open: boolean) => void;
+};
+const SidebarList = ({ setOpenBoardForm }: SidebarType) => {
+  const { state, setActiveBoardIndex } = useTasksContext();
+  const { board } = state;
+  const [isActiveBoard, setIsActiveBoard] = useState<number | null>(null);
+  const handleActiveBoardList = (index: number): void => {
+    setIsActiveBoard(index);
+    setActiveBoardIndex(index);
+  };
   return (
     <div>
       <h6 className="text-lightGray font-bold tracking-wider p-5">
-        ALL BOARDS <span>(3)</span>
+        ALL BOARDS <span>({board.length})</span>
       </h6>
       <ul>
-        <li>
-          <Button img={boardIcon} text="Platform Launch" isActive={true} />
-        </li>
-        <li>
-          <Button img={boardIcon} text="Marketing Plan" isActive={false} />
-        </li>
-        <li>
-          <Button img={boardIcon} text="Roadmap" isActive={false} />
-        </li>
+        {board.map((singleBoard, index) => {
+          return (
+            <li onClick={() => handleActiveBoardList(index)} key={index}>
+              <Button
+                img={boardIcon}
+                text={singleBoard.boardName}
+                isActive={index === isActiveBoard}
+              />
+            </li>
+          );
+        })}
       </ul>
-      <CreateBoardBtn />
+      <CreateBoardBtn setOpenBoardForm={setOpenBoardForm} />
     </div>
   );
 };
