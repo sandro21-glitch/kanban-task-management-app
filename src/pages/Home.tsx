@@ -1,4 +1,4 @@
-import Tasks from "../features/Tasks";
+import Tasks from "../features/tasks/Tasks";
 type Sidebar = {
   isSidebarOpen: boolean;
 };
