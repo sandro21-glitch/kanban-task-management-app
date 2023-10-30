@@ -1,13 +1,16 @@
 export type StateTypes = {
-  allTask: {
+  board: {
     boardName: string;
     todos: {
-      todoName: string;
       status: string;
     }[];
-    subtasks: {
-      task: string;
-      completed: boolean;
-    }[];
+  }[];
+  activeBoard: number | null;
+};
+
+export type BoardTypes = {
+  boardName: string;
+  todos: {
+    status: string;
   }[];
 };
