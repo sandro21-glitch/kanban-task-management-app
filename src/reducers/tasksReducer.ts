@@ -3,11 +3,11 @@ import { StateTypes } from "../types/StateTypes";
 
 export const tasksReducer = (state: StateTypes, action: Actions) => {
   if (action.type === "TOGGLE_LAYOUT") {
-    // ... your logic here ...
+  
   }
   if (action.type === "ADD_NEW_BOARD") {
     const updateBoard = action.payload;
-    return { ...state, board: [...state.board, updateBoard] } as StateTypes;
+    return { ...state, board: [...state.board, updateBoard] };
   }
   if (action.type === "SET_ACTIVE_BOARD") {
     return { ...state, activeBoard: action.payload };
