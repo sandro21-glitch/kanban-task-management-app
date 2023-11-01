@@ -1,38 +1,53 @@
 import { useTasksContext } from "../../context/TasksContext";
-
-const SingleTaskPage = () => {
+import AddNewColumn from "./AddNewColumn";
+type SingleTaskTypes = {
+  setAddNewColumnForm: (active: boolean) => void;
+};
+const SingleTaskPage = ({ setAddNewColumnForm }: SingleTaskTypes) => {
   const { state } = useTasksContext();
   const { board, activeBoard } = state;
 
   if (activeBoard == null) return;
   return (
     <div className="flex h-full">
-      <ul className="flex">
+      <ul className="flex gap-5">
         {board[activeBoard].todos.map((todo, index) => {
+          // console.log(todo);
           return (
-            <li
-              key={index}
-              className="min-w-[280px] font-bold text-[#828fa3] text-[.8rem] tracking-widest"
-            >
-              {todo.status}
+            <li className="flex flex-col" key={index}>
+              {/* todo status */}
+              <div className="min-w-[280px] font-bold text-[#828fa3] text-[.8rem] tracking-widest">
+                {todo.status}
+                <span>({todo.statusTodos.length})</span>
+              </div>
+              {/* todo lsit */}
+              <div className="flex flex-col gap-5 mt-5">
+                {todo.statusTodos.map((statusTodo, subtaskIndex) => (
+                  <div
+                    key={subtaskIndex}
+                    className="bg-white w-full px-3 py-5 rounded-lg shadow-md"
+                  >
+                    <h6 className="font-bold text-[.9rem]">
+                      {statusTodo.todoName}
+                    </h6>
+                    <div className="flex items-center gap-1 text-[#828fa3] font-bold text-[.75rem]">
+                      {statusTodo.subtasks
+                        .filter((subTask) => subTask.completed)
+                        .length.toString()}{" "}
+                      <span>of</span>
+                      {statusTodo.subtasks
+                        .filter((subTask) => subTask)
+                        .length.toString()}
+                      <span>subtasks</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </li>
           );
         })}
-        {/* <li className="min-w-[280px] font-bold text-[#828fa3] text-sm">
-          Todo (4)
-        </li>
-        <li className="min-w-[280px] font-bold text-[#828fa3] text-sm">
-          Doing (5)
-        </li>
-        <li className="min-w-[280px] font-bold text-[#828fa3] text-sm">
-          Done (7)
-        </li> */}
       </ul>
-      <div className="group min-w-[280px] min-h-full flex justify-center items-center mt-10 bg-hoverGray rounded-md cursor-pointer">
-        <div className="p-5 font-bold text-[1.5rem] text-[#828fa3] group-hover:text-mediumPurple transition-all ease-in duration-150 ">
-          + New Column
-        </div>
-      </div>
+      <AddNewColumn setAddNewColumnForm={setAddNewColumnForm} />
     </div>
   );
 };
