@@ -28,6 +28,10 @@ const TasksContext: React.FC<{ children: ReactNode }> = ({ children }) => {
     dispatch({ type: "SET_ACTIVE_BOARD", payload: index });
   };
 
+  // const editoBoardInfo = (data) => {
+  //   dispatch({ type: "EDIT_BOARD", payload: data });
+  // };
+
   return (
     <TasksProvider.Provider
       value={{ state, dispatch, addNewBoard, setActiveBoardIndex }}
