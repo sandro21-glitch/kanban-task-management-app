@@ -9,10 +9,24 @@ const EditBoard = ({ addNewColumnForm }: EditBoardTypes) => {
   const [boardNameValue, setBoardNameValue] = useState(
     activeBoard ? board[activeBoard].boardName : ""
   );
+  const [todoStatus, setTodoStatus] = useState<string[]>([] as string[]);
+
   useEffect(() => {
     if (activeBoard === null) return;
     setBoardNameValue(board[activeBoard].boardName);
+
+    // Initialize todoStatus based on the active board's todos
+    const initialTodoStatus = board[activeBoard].todos.map(
+      (todo) => todo.status
+    );
+
+    setTodoStatus(initialTodoStatus);
   }, [board, activeBoard]);
+  console.log(todoStatus);
+
+  const addNewColInput = (newTodo: string) => {
+    setTodoStatus((prevTodos) => [...prevTodos, newTodo]);
+  };
 
   if (activeBoard === null) return null;
 
@@ -37,6 +51,21 @@ const EditBoard = ({ addNewColumnForm }: EditBoardTypes) => {
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="">Board Columns</label>
+                    {/* {board.todos.map((todo, todoIndex) => {
+                      return (
+                        <input
+                          key={todoIndex}
+                          type="text"
+                          value={todo.status}
+                          onChange={(e) =>
+                            setTodoStatus((prevTodos) => [
+                              ...prevTodos,
+                              e.target.value,
+                            ])
+                          }
+                        />
+                      );
+                    })} */}
                   </div>
                 </div>
               );
