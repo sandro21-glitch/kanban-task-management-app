@@ -9,6 +9,9 @@ type Props = {
 const AddNewBoard = ({ data, setOpenBoardForm }: Props) => {
   const { addNewBoard } = useTasksContext();
   const handleAddNewBoard = (): void => {
+    if (data.boardName === "") {
+      return;
+    }
     addNewBoard(data);
     setOpenBoardForm(false);
   };
