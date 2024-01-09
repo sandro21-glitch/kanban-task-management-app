@@ -8,7 +8,7 @@ import EditBoard from "./features/tasks/EditBoard";
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [openBoardForm, setOpenBoardForm] = useState<boolean>(false);
-  const [addNewColumnForm, setAddNewColumnForm] = useState(false);
+  const [addNewColumnForm, setAddNewColumnForm] = useState<boolean>(false);
   return (
     <main>
       <Navbar />
