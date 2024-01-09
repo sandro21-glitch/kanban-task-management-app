@@ -24,9 +24,9 @@ const EditBoard = ({ addNewColumnForm }: EditBoardTypes) => {
   }, [board, activeBoard]);
   console.log(todoStatus);
 
-  const addNewColInput = (newTodo: string) => {
-    setTodoStatus((prevTodos) => [...prevTodos, newTodo]);
-  };
+  // const addNewColInput = (newTodo: string) => {
+  //   setTodoStatus((prevTodos) => [...prevTodos, newTodo]);
+  // };
 
   if (activeBoard === null) return null;
 
