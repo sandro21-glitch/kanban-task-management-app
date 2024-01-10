@@ -3,10 +3,8 @@ import iconCross from "/assets/icon-cross.svg";
 const Subtasks = () => {
   const [subtasks, setSubtasks] = useState<string[]>(["Make Coffee"]);
 
-  const handleRemoveSubtask = (task: string): void => {
-    const newSubtasks = subtasks.filter(
-      (subtask) => subtask.toLocaleLowerCase() !== task.toLocaleLowerCase()
-    );
+  const handleRemoveSubtask = (subIndex: number): void => {
+    const newSubtasks = subtasks.filter((_, index) => index !== subIndex);
     setSubtasks(newSubtasks);
   };
 
@@ -47,7 +45,7 @@ const Subtasks = () => {
                 <button
                   type="button"
                   className="ml-5"
-                  onClick={() => handleRemoveSubtask(subtask)}
+                  onClick={() => handleRemoveSubtask(index)}
                 >
                   <img src={iconCross} alt="cross icon" />
                 </button>
