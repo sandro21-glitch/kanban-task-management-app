@@ -4,14 +4,16 @@ import Sidebar from "./ui/Sidebar";
 import Navbar from "./ui/Navbar";
 import CreateNewBoard from "./features/forms/CreateNewBoard";
 import EditBoard from "./features/tasks/EditBoard";
+import NewTaskPopup from "./features/forms/NewTaskPopup";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [openBoardForm, setOpenBoardForm] = useState<boolean>(false);
   const [addNewColumnForm, setAddNewColumnForm] = useState<boolean>(false);
   return (
-    <main>
+    <main className="relative">
       <Navbar />
+      <NewTaskPopup />
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
