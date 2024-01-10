@@ -42,21 +42,19 @@ const CreateNewBoard = ({ openBoardForm, setOpenBoardForm }: FormType) => {
     boardName: boardName,
     todos: boardColList.map((col) => ({
       status: col.name,
-      statusTodos: [
-        {
-          todoName: "Build UI for onboarding flow",
-          subtasks: [
-            { subtaskName: "Subtask 1.1", completed: false },
-            { subtaskName: "Subtask 1.2", completed: true },
-            { subtaskName: "Subtask 1.2", completed: true },
-            { subtaskName: "Subtask 1.2", completed: true },
-            { subtaskName: "Subtask 1.2", completed: true },
-          ],
-        },
-      ],
+      statusTodos: [],
     })),
   };
-
+  // {
+  //   todoName: "Build UI for onboarding flow",
+  //   subtasks: [
+  //     { subtaskName: "Subtask 1.1", completed: false },
+  //     { subtaskName: "Subtask 1.2", completed: true },
+  //     { subtaskName: "Subtask 1.2", completed: true },
+  //     { subtaskName: "Subtask 1.2", completed: true },
+  //     { subtaskName: "Subtask 1.2", completed: true },
+  //   ],
+  // },
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const handleOutsideClick = () => {
