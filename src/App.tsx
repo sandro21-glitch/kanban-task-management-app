@@ -10,10 +10,11 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [openBoardForm, setOpenBoardForm] = useState<boolean>(false);
   const [addNewColumnForm, setAddNewColumnForm] = useState<boolean>(false);
+  const [addNewTask, setAddNewTask] = useState<boolean>(false);
   return (
     <main className="relative">
-      <Navbar />
-      <NewTaskPopup />
+      <Navbar setAddNewTask={setAddNewTask} />
+      {addNewTask && <NewTaskPopup />}
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
