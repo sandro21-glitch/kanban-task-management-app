@@ -35,7 +35,7 @@ const Subtasks = () => {
                 className="w-full flex items-center justify-center"
               >
                 <input
-                  id="subtask"
+                  id={subtask}
                   type="text"
                   value={subtasks[index]}
                   onChange={(e) => handleSubtaskChange(index, e.target.value)}
