@@ -1,13 +1,14 @@
 import { createContext, useContext, ReactNode, useReducer } from "react";
 import { tasksReducer } from "../reducers/tasksReducer";
 import { Actions } from "../types/Actions";
-import { BoardTypes, StateTypes } from "../types/StateTypes";
+import { BoardTypes, StateTypes, TodoType } from "../types/StateTypes";
 
 type TasksContextType = {
   state: StateTypes;
   dispatch: React.Dispatch<Actions>;
   addNewBoard: (board: BoardTypes) => void;
   setActiveBoardIndex: (index: number) => void;
+  addTodos: (todoData: TodoType, colName: string) => void;
 };
 
 const TasksProvider = createContext<TasksContextType | null>(null);
@@ -15,7 +16,7 @@ const TasksProvider = createContext<TasksContextType | null>(null);
 const initialState = {
   board: [],
   activeBoard: null,
-  selectedBoard: [],
+  selectedBoard: null,
 };
 
 const TasksContext: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -29,10 +30,13 @@ const TasksContext: React.FC<{ children: ReactNode }> = ({ children }) => {
     dispatch({ type: "SET_ACTIVE_BOARD", payload: index });
   };
 
- 
+  const addTodos = (todoData: TodoType, colName: string) => {
+    dispatch({ type: "ADD_TODO", payload: { todoData, colName } });
+  };
+
   return (
     <TasksProvider.Provider
-      value={{ state, dispatch, addNewBoard, setActiveBoardIndex }}
+      value={{ state, dispatch, addNewBoard, setActiveBoardIndex, addTodos }}
     >
       {children}
     </TasksProvider.Provider>
