@@ -16,5 +16,5 @@ export type BoardTypes = {
 export type StateTypes = {
   board: BoardTypes[];
   activeBoard: number | null;
-  selectedBoard: BoardTypes[];
+  selectedBoard: BoardTypes | null;
 };
