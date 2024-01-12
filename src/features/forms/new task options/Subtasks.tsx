@@ -1,7 +1,10 @@
-import { useState } from "react";
 import iconCross from "/assets/icon-cross.svg";
-const Subtasks = () => {
-  const [subtasks, setSubtasks] = useState<string[]>(["Make Coffee"]);
+type SubtaskTypes = {
+  subtasks: string[];
+  setSubtasks: React.Dispatch<React.SetStateAction<string[]>>;
+};
+const Subtasks = ({ subtasks, setSubtasks }: SubtaskTypes) => {
+  // const [subtasks, setSubtasks] = useState<string[]>(["Make Coffee"]);
 
   const handleRemoveSubtask = (subIndex: number): void => {
     const newSubtasks = subtasks.filter((_, index) => index !== subIndex);
