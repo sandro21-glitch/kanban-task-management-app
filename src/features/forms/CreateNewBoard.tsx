@@ -40,19 +40,9 @@ const CreateNewBoard = ({ openBoardForm, setOpenBoardForm }: FormType) => {
 
   const data: BoardTypes = {
     boardName: boardName,
-    todos: boardColList.map((col) => ({
-      status: col.name,
-      statusTodos: [
-        {
-          todoName: "TodoName",
-          subtasks: [
-            {
-              subtaskName: "SUBTASK",
-              completed: false,
-            },
-          ],
-        },
-      ],
+    todos: boardColList.map((statusName) => ({
+      status: statusName.name,
+      statusTodos: [], //there we will push todoStatus data
     })),
   };
   const formRef = useRef<HTMLFormElement | null>(null);
