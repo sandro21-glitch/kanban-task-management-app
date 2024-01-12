@@ -1,7 +1,7 @@
 // import { StateTypes } from "./StateTypes";
 
 import { BoardTypes } from "./StateTypes";
-
+import { TodoType } from "./StateTypes";
 export type Actions =
   | {
       type: "TOGGLE_LAYOUT";
@@ -14,4 +14,8 @@ export type Actions =
   | {
       type: "SET_ACTIVE_BOARD";
       payload: number;
+    }
+  | {
+      type: "ADD_TODO";
+      payload: { todoData: TodoType; colName: string };
     };
