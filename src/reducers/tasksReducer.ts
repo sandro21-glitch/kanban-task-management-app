@@ -11,15 +11,15 @@ export const tasksReducer = (state: StateTypes, action: Actions) => {
     return { ...state, board: [...state.board, updateBoard] };
   }
   if (action.type === "SET_ACTIVE_BOARD") {
-    const newSelectedBoard = state.board.find(
-      (_, index) => index === action.payload
-    );
-
+    const newSelectedBoard = state.board[action.payload];
     return {
       ...state,
       activeBoard: action.payload,
-      selectedBoard: newSelectedBoard ? [newSelectedBoard] : [],
+      selectedBoard: newSelectedBoard ? newSelectedBoard : null,
     };
+  }
+  if (action.type === "ADD_TODO") {
+    return { ...state };
   }
 
   return state;
