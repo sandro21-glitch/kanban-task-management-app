@@ -1,7 +1,18 @@
 import { useState } from "react";
+import { BoardTypes } from "../../../types/StateTypes";
 
-const SelectTaskStatus = () => {
+interface SelectTaskTypes {
+  selectedBoard: BoardTypes | null;
+  setColName: (colName: string) => void;
+}
+const SelectTaskStatus = ({ selectedBoard, setColName }: SelectTaskTypes) => {
   const [openDropdown, setOpenDropdown] = useState(false);
+
+  const handleSelectStatus = (colName: string): void => {
+    setColName(colName);
+    setOpenDropdown(false);
+  };
+
   return (
     <div className="w-full mb-5">
       <h2 className="text-[1rem] text-black mb-2">Status</h2>
@@ -27,9 +38,13 @@ const SelectTaskStatus = () => {
             className="py-2 text-[1rem] text-lightGray font-medium"
             aria-labelledby="dropdownDefaultButton"
           >
-            <li className="cursor-pointer">test</li>
-            <li className="cursor-pointer">test</li>
-            <li className="cursor-pointer">test</li>
+            {selectedBoard?.todos.map((todoList) => {
+              return (
+                <li onClick={() => handleSelectStatus(todoList.status)}>
+                  {todoList.status}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
