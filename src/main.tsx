@@ -2,11 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import TasksContext from "./context/TasksContext.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <TasksContext>
-      <App />
-    </TasksContext>
+    <App />
   </React.StrictMode>
 );
