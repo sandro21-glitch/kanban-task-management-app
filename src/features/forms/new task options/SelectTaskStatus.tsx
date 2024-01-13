@@ -38,9 +38,12 @@ const SelectTaskStatus = ({ selectedBoard, setColName }: SelectTaskTypes) => {
             className="py-2 text-[1rem] text-lightGray font-medium"
             aria-labelledby="dropdownDefaultButton"
           >
-            {selectedBoard?.todos.map((todoList) => {
+            {selectedBoard?.todos.map((todoList, todoIndex) => {
               return (
-                <li onClick={() => handleSelectStatus(todoList.status)}>
+                <li
+                  key={todoIndex}
+                  onClick={() => handleSelectStatus(todoList.status)}
+                >
                   {todoList.status}
                 </li>
               );
