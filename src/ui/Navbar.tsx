@@ -1,6 +1,6 @@
 import AddNewTaskBtn from "./AddNewTaskBtn";
+import BoardControls from "./BoardControls";
 import logo from "/assets/logo.svg";
-import iconVert from "/assets/icon-vertical-ellipsis.svg";
 
 const Navbar = () => {
   return (
@@ -13,9 +13,7 @@ const Navbar = () => {
         <li className="text-[1.5rem] font-bold">Example Board</li>
         <li className="flex items-center gap-5">
           <AddNewTaskBtn />
-          <button>
-            <img src={iconVert} alt="" />
-          </button>
+          <BoardControls />
         </li>
       </ul>
     </nav>
