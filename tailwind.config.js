@@ -9,6 +9,9 @@ export default {
         hoverGray: "rgba(99,95,199,.1)",
         boardColor: "#f4f7fd",
       },
+      minWidth: {
+        sidebarWidth: "300px",
+      },
     },
   },
   plugins: [],
