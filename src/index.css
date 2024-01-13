@@ -117,3 +117,6 @@ h6 {
   max-width: var(--max-width);
   margin: 0 auto;
 }
+.gray-svg {
+  filter: grayscale(100%) brightness(0.6);
+}
