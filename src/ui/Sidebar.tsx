@@ -1,10 +1,17 @@
 import SidebarTop from "./SidebarTop";
 import lightMode from "/assets/light-mode.svg";
 import darkMode from "/assets/dark-mode.svg";
-import hideSidebar from "/assets/hide-sidebar.svg";
+import HideSidebarBtn from "./HideSidebarBtn";
+import { useAppSelector } from "../hooks/reduxHooks";
+import OpenSidebar from "./OpenSidebar";
 const Sidebar = () => {
+  const { isSidebarOpen } = useAppSelector((store) => store.popup);
+  if (!isSidebarOpen) return <OpenSidebar />;
   return (
-    <aside className="min-w-sidebarWidth min-h-[90vh] py-5 flex flex-col justify-between border-r">
+    <aside
+      className={`min-w-sidebarWidth bg-white min-h-[90vh] py-5 flex flex-col justify-between border-r
+      transition-all ease-in duration-200 delay-200`}
+    >
       {/* top side */}
       <SidebarTop />
       {/* bot side */}
@@ -17,13 +24,7 @@ const Sidebar = () => {
           </label>
           <img src={darkMode} alt="dark mode" />
         </div>
-        <button
-          className="hover:bg-hoverGray w-[90%] pl-5 flex
-         items-center justify-start gap-5 py-[1rem] font-bold text-lightGray hover:text-mediumPurple rounded-r-full transition-all ease-in duration-150 cursor-pointer"
-        >
-          <img src={hideSidebar} alt="hide sidebar" />
-          Hide Sidebar
-        </button>
+        <HideSidebarBtn />
       </div>
     </aside>
   );
