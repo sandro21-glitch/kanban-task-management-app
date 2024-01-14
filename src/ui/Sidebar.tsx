@@ -1,29 +1,28 @@
-import boardIcon from "/assets/board-icon.svg";
+import SidebarTop from "./SidebarTop";
+import lightMode from "/assets/light-mode.svg";
+import darkMode from "/assets/dark-mode.svg";
+import hideSidebar from "/assets/hide-sidebar.svg";
 const Sidebar = () => {
   return (
-    <aside className="min-w-sidebarWidth py-5">
+    <aside className="min-w-sidebarWidth min-h-[90vh] py-5 flex flex-col justify-between border-r">
       {/* top side */}
-      <div className="">
-        <h2 className="uppercase text-[.8rem] text-lightGray font-bold tracking-widest mb-5 ml-5">
-          all boards (2)
-        </h2>
-        <ul className="w-[90%]">
-          <li className="py-[1rem] bg-mediumPurple rounded-r-full flex items-center gap-5 cursor-pointer">
-            <img src={boardIcon} alt="board icon" className="ml-5" />
-            <h3 className="text-[.9rem] font-bold text-white capitalize">
-              Example Board
-            </h3>
-          </li>
-          <li className="py-[1rem] rounded-r-full flex items-center gap-5 hover:bg-hoverGray transition-all ease-in duration-150 cursor-pointer">
-            <img src={boardIcon} alt="board icon" className="ml-5 gray-svg" />
-            <h3 className="text-[.9rem] font-bold text-lightGray capitalize">
-              Example Board
-            </h3>
-          </li>
-        </ul>
-        <button className="text-mediumPurple font-bold flex items-center gap-5 mt-5">
-          <img src={boardIcon} alt="board icon" className="ml-5 gray-svg" />+
-          Create New Board
+      <SidebarTop />
+      {/* bot side */}
+      <div>
+        <div className="flex items-center justify-center gap-5 mb-5 bg-boardColor py-[.9rem] max-w-[90%] rounded-lg">
+          <img src={lightMode} alt="light mode" />
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" value="" className="sr-only peer" />
+            <div className="w-11 h-6 bg-mediumPurple peer-focus:outline-none peer-focus:ring-4 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-mediumPurple"></div>
+          </label>
+          <img src={darkMode} alt="dark mode" />
+        </div>
+        <button
+          className="hover:bg-hoverGray w-[90%] pl-5 flex
+         items-center justify-start gap-5 py-[1rem] font-bold text-lightGray hover:text-mediumPurple rounded-r-full transition-all ease-in duration-150 cursor-pointer"
+        >
+          <img src={hideSidebar} alt="hide sidebar" />
+          Hide Sidebar
         </button>
       </div>
     </aside>
