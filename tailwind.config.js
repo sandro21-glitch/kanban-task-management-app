@@ -8,7 +8,9 @@ export default {
         lightGray: "#828fa3",
         hoverGray: "rgba(99,95,199,.1)",
         boardColor: "#f4f7fd",
-        
+        boardColorDark: "#20212c",
+        lightDark: "#3e3f4e",
+        mediumDark: "#3e3f4e",
       },
       minWidth: {
         sidebarWidth: "300px",
