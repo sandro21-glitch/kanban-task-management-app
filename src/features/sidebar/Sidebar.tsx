@@ -5,11 +5,15 @@ import OpenSidebar from "./OpenSidebar";
 import SidebarBot from "./SidebarBot";
 const Sidebar = () => {
   const { isSidebarOpen } = useAppSelector((store) => store.popup);
+  const darkMode = useAppSelector((store) => store.theme.darkMode);
   if (!isSidebarOpen) return <OpenSidebar />;
   return (
     <aside
-      className={`min-w-sidebarWidth bg-white min-h-[90vh] py-5 flex flex-col justify-between border-r
-      transition-all ease-in duration-200 delay-200`}
+      className={`min-w-sidebarWidth ${
+        darkMode ? "bg-lightDark border-r-lightGray" : "bg-white"
+      }
+       min-h-[90vh] py-5 flex flex-col justify-between 
+      transition-all ease-in duration-150 border-r`}
     >
       {/* top side */}
       <SidebarTop />
