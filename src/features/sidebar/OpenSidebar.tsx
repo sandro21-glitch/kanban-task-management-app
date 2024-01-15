@@ -1,5 +1,5 @@
-import { setSidebar } from "../features/popups/popupSlice";
-import { useAppDispatch } from "../hooks/reduxHooks";
+import { setSidebar } from "../popups/popupSlice";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 import showSidebar from "/assets/show-sidebar.svg";
 const OpenSidebar = () => {
   const dispatch = useAppDispatch();

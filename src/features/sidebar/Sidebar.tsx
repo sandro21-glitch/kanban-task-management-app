@@ -2,7 +2,7 @@ import SidebarTop from "./SidebarTop";
 import lightMode from "/assets/light-mode.svg";
 import darkMode from "/assets/dark-mode.svg";
 import HideSidebarBtn from "./HideSidebarBtn";
-import { useAppSelector } from "../hooks/reduxHooks";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import OpenSidebar from "./OpenSidebar";
 const Sidebar = () => {
   const { isSidebarOpen } = useAppSelector((store) => store.popup);

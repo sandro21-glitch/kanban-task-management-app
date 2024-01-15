@@ -1,5 +1,5 @@
 import Board from "../features/board/Board";
-import Sidebar from "../ui/Sidebar";
+import Sidebar from "../features/sidebar/Sidebar";
 
 const Home = () => {
   return (

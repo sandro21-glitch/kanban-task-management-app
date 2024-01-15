@@ -1,4 +1,4 @@
-import CreateNewBoardBtn from "./CreateNewBoardBtn";
+import CreateNewBoardBtn from "../../ui/CreateNewBoardBtn";
 import boardIcon from "/assets/board-icon.svg";
 const SidebarTop = () => {
   return (
