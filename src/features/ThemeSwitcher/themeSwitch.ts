@@ -15,10 +15,14 @@ const initialState: ThemeState = {
 export const themeSlice = createSlice({
   name: "theme",
   initialState,
-  reducers: {},
+  reducers: {
+    setDarkMode: (state) => {
+      state.darkMode = !state.darkMode;
+    },
+  },
 });
 
-export const {} = themeSlice.actions;
+export const { setDarkMode } = themeSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value;
