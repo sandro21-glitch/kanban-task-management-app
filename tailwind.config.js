@@ -11,6 +11,7 @@ export default {
         boardColorDark: "#20212c",
         lightDark: "#3e3f4e",
         mediumDark: "#3e3f4e",
+        gradientGray: "#252631",
       },
       minWidth: {
         sidebarWidth: "300px",
