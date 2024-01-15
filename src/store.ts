@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import popupReducer from "./features/popups/popupSlice";
-// ...
+import themeReducer from "./features/ThemeSwitcher/themeSlice";
 
 export const store = configureStore({
   reducer: {
     popup: popupReducer,
+    theme: themeReducer,
   },
 });
 
