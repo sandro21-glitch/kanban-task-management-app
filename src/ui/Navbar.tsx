@@ -5,6 +5,10 @@ import logo from "/assets/logo.svg";
 
 const Navbar = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+  const boards = useAppSelector((store) => store.board.boards);
+  const activeBoardName = boards
+    .filter((board) => board.isActive)
+    .map((board) => board.name);
   return (
     <nav
       className={`h-[97px] w-full flex items-center justify-between
@@ -17,7 +21,7 @@ const Navbar = () => {
           darkMode ? "border-r-lightGray" : null
         } h-full`}
       >
-        <img src={logo} alt="" className="ml-5" />
+        <img src={logo} alt="logo" className="ml-5" />
         <h1
           className={`font-bold text-[2rem] ${
             darkMode ? "text-white" : "text-black"
@@ -37,7 +41,7 @@ const Navbar = () => {
               darkMode ? "text-white" : "text-black"
             }`}
           >
-            Example Board
+            {activeBoardName}
           </li>
           <li className="flex items-center gap-5">
             <AddNewTaskBtn />
