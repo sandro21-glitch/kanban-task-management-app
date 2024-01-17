@@ -1,10 +1,16 @@
+import { useAppSelector } from "../../hooks/reduxHooks";
+import TodoTasks from "./TodoTasks";
+
 const BoardColumns = () => {
+  const { boards } = useAppSelector((store) => store.board);
+  const activeBoardCols = boards.filter((board) => board.isActive);
+  const { boardTodos } = activeBoardCols[0];
   return (
     <article>
-      <ul className="flex text-lightGray">
-        <li className="min-w-[17.5em]">Todo (1)</li>
-        <li className="min-w-[17.5em]">IN PROGRESS (0)</li>
-        <li className="min-w-[17.5em]">Done (2)</li>
+      <ul className="flex gap-7 text-lightGray">
+        {boardTodos.map((todo, index) => {
+          return <TodoTasks key={index} todo={todo} />;
+        })}
       </ul>
     </article>
   );
