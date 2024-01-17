@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 // import type { RootState } from "../../store";
 
 // Define a type for the slice state
-interface BoardState {
+export interface BoardState {
   boards: {
     id: number;
     name: string;
@@ -71,20 +71,20 @@ const initialState: BoardState = {
               taskDesc: "Description 1",
               subtasks: [
                 { subtaskName: "Subtask 1", isCompleted: false },
-                { subtaskName: "Subtask 2", isCompleted: true },
+                { subtaskName: "Subtask 2", isCompleted: false },
               ],
             },
           ],
         },
         {
-          todoName: "Later",
+          todoName: "Later2",
           todoTasks: [
             {
               taskName: "Task 1",
               taskDesc: "Description 1",
               subtasks: [
                 { subtaskName: "Subtask 1", isCompleted: false },
-                { subtaskName: "Subtask 2", isCompleted: true },
+                { subtaskName: "Subtask 2", isCompleted: false },
               ],
             },
           ],
