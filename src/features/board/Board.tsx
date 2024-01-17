@@ -4,6 +4,7 @@ import BoardColumns from "./BoardColumns";
 
 const Board = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+
   return (
     <section
       className={`w-full h-[90vh] p-5 flex gap-5 ${
