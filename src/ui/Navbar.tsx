@@ -13,12 +13,12 @@ const Navbar = () => {
     <nav
       className={`h-[97px] w-full flex items-center justify-between
        ${
-         darkMode ? "bg-mediumDark" : "bg-white"
+         darkMode ? "bg-darkMode" : "bg-white"
        } transition-all ease-in duration-150`}
     >
       <div
         className={`flex items-center border-r gap-4 min-w-[300px] ${
-          darkMode ? "border-r-lightGray" : null
+          darkMode ? "border-r-mediumDark" : null
         } h-full`}
       >
         <img src={logo} alt="logo" className="ml-5" />
@@ -32,7 +32,7 @@ const Navbar = () => {
       </div>
       <div
         className={`w-full h-full border-b ${
-          darkMode ? "border-b-lightGray" : null
+          darkMode ? "border-b-mediumDark" : null
         } flex items-center`}
       >
         <ul className="flex items-center justify-between w-full mx-5 ">
