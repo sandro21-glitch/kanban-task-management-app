@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <aside
       className={`min-w-sidebarWidth ${
-        darkMode ? "bg-lightDark border-r-lightGray" : "bg-white"
+        darkMode ? "bg-darkMode border-r-mediumDark" : "bg-white"
       }
        min-h-[90vh] py-5 flex flex-col justify-between 
       transition-all ease-in duration-150 border-r`}
