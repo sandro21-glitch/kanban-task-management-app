@@ -12,6 +12,7 @@ export default {
         lightDark: "#3e3f4e",
         mediumDark: "#3e3f4e",
         gradientGray: "#252631",
+        sidebarHover: "#625fc71e",
       },
       minWidth: {
         sidebarWidth: "300px",
