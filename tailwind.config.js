@@ -9,6 +9,7 @@ export default {
         hoverGray: "rgba(99,95,199,.1)",
         boardColor: "#f4f7fd",
         boardColorDark: "#20212c",
+        darkMode: "#2b2c37",
         lightDark: "#3e3f4e",
         mediumDark: "#3e3f4e",
         gradientGray: "#252631",
