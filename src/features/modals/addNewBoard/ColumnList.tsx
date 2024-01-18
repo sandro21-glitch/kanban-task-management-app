@@ -1,6 +1,8 @@
+import { useAppSelector } from "../../../hooks/reduxHooks";
 import crossIcon from "/assets/icon-cross.svg";
 
 const ColumnList = () => {
+  const darkMode = useAppSelector((store) => store.theme.darkMode);
   return (
     <div className="mb-5">
       <label className="text-lightGray font-semibold text-[.8rem] mb-1">
@@ -11,7 +13,9 @@ const ColumnList = () => {
           <input
             type="text"
             placeholder="e.g Todo"
-            className="outline-none border p-2 text-[.9rem] w-full"
+            className={`w-full outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
+              darkMode ? "bg-darkMode text-white" : "bg-white text-black"
+            }`}
           />
           <button className="ml-5">
             <img src={crossIcon} alt="remove icon" />
@@ -21,7 +25,9 @@ const ColumnList = () => {
           <input
             type="text"
             placeholder="e.g Todo"
-            className="outline-none border p-2 text-[.9rem] w-full"
+            className={`w-full outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
+              darkMode ? "bg-darkMode text-white" : "bg-white text-black"
+            }`}
           />
           <button className="ml-5">
             <img src={crossIcon} alt="remove icon" />
