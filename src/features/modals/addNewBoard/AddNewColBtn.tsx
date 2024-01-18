@@ -1,9 +1,19 @@
 import { useAppSelector } from "../../../hooks/reduxHooks";
-
-const AddNewColBtn = () => {
+type NewColTypes = {
+  setBoardCols: (cols: string[]) => void;
+  boardCols: string[];
+};
+const AddNewColBtn = ({ setBoardCols, boardCols }: NewColTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+
+  const handleAddCols = () => {
+    const prevCols = [...boardCols, ""];
+    setBoardCols(prevCols);
+  };
+
   return (
     <button
+      onClick={() => handleAddCols()}
       type="button"
       className={`rounded-full w-full ${
         darkMode ? "bg-white" : "bg-sidebarHover hover:bg-transparent"
