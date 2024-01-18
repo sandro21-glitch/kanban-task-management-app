@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import AddNewColBtn from "./AddNewColBtn";
 import BoardName from "./BoardName";
@@ -6,6 +7,9 @@ import CreateNewBoardBtn from "./CreateNewBoardBtn";
 
 const AddNewBoard = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+  const [boardName, setBoardName] = useState<string>("");
+  const [boardCols, setBoardCols] = useState<string[]>(["Todo","Doing"]);
+
   return (
     <form>
       <div
@@ -20,10 +24,10 @@ const AddNewBoard = () => {
         >
           Add new board
         </h3>
-        <BoardName />
+        <BoardName setBoardName={setBoardName} boardName={boardName} />
         {/* board cols */}
-        <ColumnList />
-        <AddNewColBtn />
+        <ColumnList boardCols={boardCols} setBoardCols={setBoardCols} />
+        <AddNewColBtn boardCols={boardCols} setBoardCols={setBoardCols} />
         <CreateNewBoardBtn />
       </div>
     </form>
