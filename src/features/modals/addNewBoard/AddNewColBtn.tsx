@@ -4,6 +4,7 @@ const AddNewColBtn = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   return (
     <button
+      type="button"
       className={`rounded-full w-full ${
         darkMode ? "bg-white" : "bg-sidebarHover hover:bg-transparent"
       }  py-2 mb-6

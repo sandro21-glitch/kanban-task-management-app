@@ -17,7 +17,7 @@ const ColumnList = () => {
               darkMode ? "bg-darkMode text-white" : "bg-white text-black"
             }`}
           />
-          <button className="ml-5">
+          <button type="button" className="ml-5">
             <img src={crossIcon} alt="remove icon" />
           </button>
         </li>
@@ -29,7 +29,7 @@ const ColumnList = () => {
               darkMode ? "bg-darkMode text-white" : "bg-white text-black"
             }`}
           />
-          <button className="ml-5">
+          <button type="button" className="ml-5">
             <img src={crossIcon} alt="remove icon" />
           </button>
         </li>
