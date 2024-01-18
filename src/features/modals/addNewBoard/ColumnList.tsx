@@ -13,7 +13,10 @@ const ColumnList = ({ boardCols, setBoardCols }: ColumnListTypes) => {
     setBoardCols(newBoardCols);
   };
 
-
+  const handleRemoveCols = (index: number) => {
+    const newCols = boardCols.filter((_, colIndex) => colIndex !== index);
+    setBoardCols(newCols);
+  };
 
   return (
     <div className="mb-5">
@@ -33,7 +36,11 @@ const ColumnList = ({ boardCols, setBoardCols }: ColumnListTypes) => {
                   darkMode ? "bg-darkMode text-white" : "bg-white text-black"
                 }`}
               />
-              <button type="button" className="ml-5">
+              <button
+                onClick={() => handleRemoveCols(index)}
+                type="button"
+                className="ml-5"
+              >
                 <img src={crossIcon} alt="remove icon" />
               </button>
             </li>
