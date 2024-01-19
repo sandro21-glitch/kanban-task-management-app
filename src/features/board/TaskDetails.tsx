@@ -12,6 +12,7 @@ type TaskDetailsTypes = {
 };
 const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+  if (todoTasks.length === 0) return null;
   return (
     <div
       className={`w-[280px] ${
@@ -30,7 +31,7 @@ const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
               className={`group-hover:text-mediumPurple
              ${
                darkMode ? "text-white" : "text-black"
-            } text-[.9rem] font-semibold transition-colors ease-in duration-150`}
+             } text-[.9rem] font-semibold transition-colors ease-in duration-150`}
             >
               {taskName}
             </p>
