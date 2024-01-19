@@ -4,7 +4,7 @@ import AddNewColBtn from "./AddNewColBtn";
 import BoardName from "./BoardName";
 import ColumnList from "./ColumnList";
 import CreateNewBoardBtn from "./CreateNewBoardBtn";
-import { addNewBoard } from "../../board/tasksSlice";
+import { addNewBoard } from "../../board/boardsSlice";
 
 const AddNewBoard = () => {
   const dispatch = useAppDispatch();
