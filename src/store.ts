@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import popupReducer from "./features/popups/popupSlice";
 import themeReducer from "./features/ThemeSwitcher/themeSlice";
-import boardReducer from "./features/tasks/tasksSlice";
+import boardReducer from "./features/board/tasksSlice";
 import modalsReducer from "./features/modals/modalsSlice";
 export const store = configureStore({
   reducer: {

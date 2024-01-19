@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import CreateNewBoardBtn from "../../ui/CreateNewBoardBtn";
-import { setActiveBoard } from "../tasks/tasksSlice";
+import { setActiveBoard } from "../board/tasksSlice";
 import boardIcon from "/assets/board-icon.svg";
 const SidebarTop = () => {
   const dispatch = useAppDispatch();
