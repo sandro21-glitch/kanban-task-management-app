@@ -1,17 +1,28 @@
 import { useState } from "react";
-import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import AddNewColBtn from "./AddNewColBtn";
 import BoardName from "./BoardName";
 import ColumnList from "./ColumnList";
 import CreateNewBoardBtn from "./CreateNewBoardBtn";
+import { addNewBoard } from "../../tasks/tasksSlice";
 
 const AddNewBoard = () => {
+  const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   const [boardName, setBoardName] = useState<string>("");
-  const [boardCols, setBoardCols] = useState<string[]>(["Todo","Doing"]);
+  const [boardCols, setBoardCols] = useState<string[]>(["Todo", "Doing"]);
+
+  const handleAddNewBoard = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    if (!boardName) {
+      alert("Add board name");
+      return; // Stop further execution if boardName is not provided
+    }
+    dispatch(addNewBoard({ boardName, boardCols }));
+  };
 
   return (
-    <form>
+    <form onSubmit={handleAddNewBoard}>
       <div
         className={`min-w-[90vw] sm:min-w-[570px] ${
           darkMode ? "bg-darkMode" : "bg-white"
