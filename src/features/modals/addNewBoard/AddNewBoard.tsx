@@ -5,6 +5,7 @@ import BoardName from "./BoardName";
 import ColumnList from "./ColumnList";
 import CreateNewBoardBtn from "./CreateNewBoardBtn";
 import { addNewBoard } from "../../board/boardsSlice";
+import { setAddBoardModal } from "../modalsSlice";
 
 const AddNewBoard = () => {
   const dispatch = useAppDispatch();
@@ -13,12 +14,13 @@ const AddNewBoard = () => {
   const [boardCols, setBoardCols] = useState<string[]>(["Todo", "Doing"]);
 
   const handleAddNewBoard = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
     if (!boardName) {
       alert("Add board name");
-      return; // Stop further execution if boardName is not provided
+      return;
     }
     dispatch(addNewBoard({ boardName, boardCols }));
+    dispatch(setAddBoardModal());
   };
 
   return (
