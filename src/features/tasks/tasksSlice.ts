@@ -98,10 +98,19 @@ export const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
-    addBoard: (state, action: PayloadAction<{ name: string }>) => {
-      const { boards } = state;
-      const newBoard = action.payload;
-      console.log(boards, newBoard);
+    addNewBoard: (
+      state,
+      action: PayloadAction<{ boardName: string; boardCols: string[] }>
+    ) => {
+      state.boards.push({
+        id: state.boards.length + 1,
+        name: action.payload.boardName,
+        isActive: false,
+        boardTodos: action.payload.boardCols.map((column) => ({
+          todoName: column,
+          todoTasks: [],
+        })),
+      });
     },
     setActiveBoard: (state, action: PayloadAction<number>) => {
       const { boards } = state;
@@ -118,7 +127,7 @@ export const boardSlice = createSlice({
   },
 });
 
-export const { addBoard, setActiveBoard } = boardSlice.actions;
+export const { addNewBoard, setActiveBoard } = boardSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value;
