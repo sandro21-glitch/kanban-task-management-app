@@ -19,6 +19,7 @@ const SidebarBot = () => {
         <label className="relative inline-flex items-center cursor-pointer">
           <input
             type="checkbox"
+            checked={darkMode}
             onChange={() => dispatch(setDarkMode())}
             className="sr-only peer"
           />
