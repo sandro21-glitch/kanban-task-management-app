@@ -8,7 +8,7 @@ const SidebarTop = () => {
   return (
     <div>
       <h2 className="uppercase text-[.8rem] text-lightGray font-bold tracking-widest mb-5 ml-5">
-        all boards (2)
+        all boards ({boards.length})
       </h2>
       <ul className="w-[90%]">
         {boards.map((board) => {
