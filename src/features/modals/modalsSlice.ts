@@ -3,10 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface CounterState {
   addBoardModal: boolean;
+  editBoardModal: boolean;
 }
 
 const initialState: CounterState = {
   addBoardModal: false,
+  editBoardModal: true,
 };
 
 export const modalsSlice = createSlice({
@@ -16,10 +18,13 @@ export const modalsSlice = createSlice({
     setAddBoardModal: (state) => {
       state.addBoardModal = !state.addBoardModal;
     },
+    setEditBoardModal: (state) => {
+      state.editBoardModal = !state.editBoardModal;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAddBoardModal } = modalsSlice.actions;
+export const { setAddBoardModal, setEditBoardModal } = modalsSlice.actions;
 
 export default modalsSlice.reducer;
