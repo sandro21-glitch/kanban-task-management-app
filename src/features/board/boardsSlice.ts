@@ -124,7 +124,16 @@ export const boardSlice = createSlice({
         }));
       }
     },
-    editBoardCols: () => {},
+    editedBoardCols: (state, action: PayloadAction<string[]>) => {
+      const activeBoard = state.boards.find((board) => board.isActive);
+      if (activeBoard) {
+        activeBoard.boardTodos.map((todo, index) => {
+          if (action.payload[index]) {
+            todo.todoName = action.payload[index];
+          }
+        });
+      }
+    },
     editBoardName: (state, action: PayloadAction<string>) => {
       const activeBoard = state.boards.find((board) => board.isActive);
       if (activeBoard) {
@@ -134,7 +143,7 @@ export const boardSlice = createSlice({
   },
 });
 
-export const { addNewBoard, setActiveBoard, editBoardCols, editBoardName } =
+export const { addNewBoard, setActiveBoard, editedBoardCols, editBoardName } =
   boardSlice.actions;
 
 // selects only the active boards from the Redux state.
