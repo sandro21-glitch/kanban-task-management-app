@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         mediumPurple: "#635fc7",
+        lightPurple: "#625fc721",
         lightGray: "#828fa3",
         hoverGray: "rgba(99,95,199,.1)",
         boardColor: "#f4f7fd",
