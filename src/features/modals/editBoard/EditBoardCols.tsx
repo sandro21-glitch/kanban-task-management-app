@@ -36,7 +36,7 @@ const EditBoardCols = ({
     });
   };
   return (
-    <ul className="flex flex-col gap-3">
+    <ul className="flex flex-col gap-3 mb-3">
       {editBoardCols.map((col, index) => {
         return (
           <li key={index} className="flex items-center">
