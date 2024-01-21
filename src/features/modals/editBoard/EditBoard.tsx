@@ -1,7 +1,11 @@
 // import { useState } from "react";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { editBoardName, selectActiveBoard } from "../../board/boardsSlice";
+import {
+  editBoardName,
+  editedBoardCols,
+  selectActiveBoard,
+} from "../../board/boardsSlice";
 import EditBoardCols from "./EditBoardCols";
 import EditBoardName from "./EditBoardName";
 const EditBoard = () => {
@@ -9,8 +13,15 @@ const EditBoard = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   const activeBoard = useAppSelector(selectActiveBoard);
   const [editedBoardName, setEditedBoardName] = useState<string>("");
+  const [editBoardCols, setEditBoardCols] = useState<string[]>([""]);
   if (!activeBoard) return null;
   const { name, boardTodos } = activeBoard;
+
+  const handleEditBoard = () => {
+    dispatch(editedBoardCols(editBoardCols));
+    dispatch(editBoardName(editedBoardName));
+  };
+
   return (
     <div
       className={`min-w-[90vw] sm:min-w-[700px] ${
@@ -32,11 +43,12 @@ const EditBoard = () => {
       <label className="text-lightGray font-semibold text-[.8rem] mb-1">
         Board Columns
       </label>
-      <EditBoardCols boardTodos={boardTodos} />
-      <button
-        type="button"
-        onClick={() => dispatch(editBoardName(editedBoardName))}
-      >
+      <EditBoardCols
+        editBoardCols={editBoardCols}
+        setEditBoardCols={setEditBoardCols}
+        boardTodos={boardTodos}
+      />
+      <button type="button" onClick={() => handleEditBoard()}>
         Save Changes
       </button>
     </div>
