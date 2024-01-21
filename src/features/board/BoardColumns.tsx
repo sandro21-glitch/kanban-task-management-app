@@ -1,10 +1,11 @@
 import { useAppSelector } from "../../hooks/reduxHooks";
 import TodoTasks from "./TodoTasks";
+import { selectActiveBoard } from "./boardsSlice";
 
 const BoardColumns = () => {
-  const { boards } = useAppSelector((store) => store.board);
-  const activeBoardCols = boards.filter((board) => board.isActive);
-  const { boardTodos } = activeBoardCols[0];
+  const activeBoard = useAppSelector(selectActiveBoard);
+  if (!activeBoard) return null;
+  const { boardTodos } = activeBoard;
   return (
     <article>
       <ul className="flex gap-7 text-lightGray">
