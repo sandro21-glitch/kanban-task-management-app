@@ -8,6 +8,9 @@ import {
 } from "../../board/boardsSlice";
 import EditBoardCols from "./EditBoardCols";
 import EditBoardName from "./EditBoardName";
+import EditBoardBtn from "./EditBoardBtn";
+import AddNewColumnBtn from "./AddNewColumnBtn";
+import { setEditBoardModal } from "../modalsSlice";
 const EditBoard = () => {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
@@ -20,6 +23,7 @@ const EditBoard = () => {
   const handleEditBoard = () => {
     dispatch(editedBoardCols(editBoardCols));
     dispatch(editBoardName(editedBoardName));
+    dispatch(setEditBoardModal(false));
   };
 
   return (
@@ -48,9 +52,8 @@ const EditBoard = () => {
         setEditBoardCols={setEditBoardCols}
         boardTodos={boardTodos}
       />
-      <button type="button" onClick={() => handleEditBoard()}>
-        Save Changes
-      </button>
+      <AddNewColumnBtn />
+      <EditBoardBtn handleEditBoard={handleEditBoard} />
     </div>
   );
 };
