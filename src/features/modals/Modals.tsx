@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import AddNewBoard from "./addNewBoard/AddNewBoard";
-import { setAddBoardModal, setEditBoardModal } from "./modalsSlice";
+import { openEditBoardPopModal, setAddBoardModal, setEditBoardModal } from "./modalsSlice";
 import useOutsideClick from "../../hooks/useClickOutside";
 import EditBoard from "./editBoard/EditBoard";
 
@@ -12,13 +12,13 @@ const Modals = () => {
   const isAnyModalOpen = addBoardModal || editBoardModal;
   const modalRef = useRef(null);
 
-  // Access dispatch from the useDispatch hook
   const dispatch = useAppDispatch();
 
-  // Callback to close the modal
+  // callback to close the modal
   const closeModal = () => {
-    dispatch(setAddBoardModal());
-    dispatch(setEditBoardModal());
+    dispatch(setAddBoardModal(false));
+    dispatch(setEditBoardModal(false));
+    dispatch(openEditBoardPopModal(false));
   };
 
   // Attach the useOutsideClick hook to the modal container
