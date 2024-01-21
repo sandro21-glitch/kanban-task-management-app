@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import crossIcon from "/assets/icon-cross.svg";
 
@@ -13,20 +14,37 @@ type BoardColsTypes = {
       }[];
     }[];
   }[];
+  editBoardCols: string[];
+  setEditBoardCols: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-const EditBoardCols = ({ boardTodos }: BoardColsTypes) => {
+const EditBoardCols = ({
+  editBoardCols,
+  setEditBoardCols,
+  boardTodos,
+}: BoardColsTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
-console.log(boardTodos)
+
+  useEffect(() => {
+    setEditBoardCols(boardTodos.map((todo) => todo.todoName));
+  }, [boardTodos]);
+  const handleEditBoardCols = (index: number, name: string) => {
+    setEditBoardCols((prevCols) => {
+      const updatedCols = [...prevCols];
+      updatedCols[index] = name;
+      return updatedCols;
+    });
+  };
   return (
     <ul className="flex flex-col gap-3">
-      {boardTodos.map((col, index) => {
+      {editBoardCols.map((col, index) => {
         return (
           <li key={index} className="flex items-center">
             <input
               type="text"
               placeholder="e.g Todo"
-              value={col.todoName}
+              value={col}
+              onChange={(e) => handleEditBoardCols(index, e.target.value)}
               className={`w-full outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
                 darkMode ? "bg-darkMode text-white" : "bg-white text-black"
               }`}
