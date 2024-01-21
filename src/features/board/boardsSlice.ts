@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-// import type { RootState } from "../../store";
+import type { RootState } from "../../store";
 
 // Define a type for the slice state
 export interface BoardState {
@@ -124,12 +124,26 @@ export const boardSlice = createSlice({
         }));
       }
     },
+    editBoardCols: () => {},
+    editBoardName: (state, action: PayloadAction<string>) => {
+      const activeBoard = state.boards.find((board) => board.isActive);
+      if (activeBoard) {
+        activeBoard.name = action.payload;
+      }
+    },
   },
 });
 
-export const { addNewBoard, setActiveBoard } = boardSlice.actions;
+export const { addNewBoard, setActiveBoard, editBoardCols, editBoardName } =
+  boardSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value;
+// selects only the active boards from the Redux state.
+export const selectActiveBoard = createSelector(
+  (state: RootState) => state.board.boards,
+  (boards) => {
+    const firstActiveBoard = boards.find((board) => board.isActive);
+    return firstActiveBoard || null;
+  }
+);
 
 export default boardSlice.reducer;
