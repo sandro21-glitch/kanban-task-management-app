@@ -20,7 +20,7 @@ const AddNewBoard = () => {
       return;
     }
     dispatch(addNewBoard({ boardName, boardCols }));
-    dispatch(setAddBoardModal());
+    dispatch(setAddBoardModal(false));
   };
 
   return (
