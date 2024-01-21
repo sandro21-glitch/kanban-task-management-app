@@ -7,7 +7,7 @@ const CreateNewBoardBtn = () => {
 
   return (
     <button
-      onClick={() => dispatch(setAddBoardModal())}
+      onClick={() => dispatch(setAddBoardModal(true))}
       className="text-mediumPurple font-bold flex items-center gap-5 mt-5"
     >
       <img src={boardIcon} alt="board icon" className="ml-5 gray-svg" />+ Create
