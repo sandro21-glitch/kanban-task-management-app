@@ -28,6 +28,7 @@ const EditBoardCols = ({
   useEffect(() => {
     setEditBoardCols(boardTodos.map((todo) => todo.todoName));
   }, [boardTodos]);
+
   const handleEditBoardCols = (index: number, name: string) => {
     setEditBoardCols((prevCols) => {
       const updatedCols = [...prevCols];
@@ -35,6 +36,16 @@ const EditBoardCols = ({
       return updatedCols;
     });
   };
+
+  const handleRemoveCol = (indexToRemove: number) => {
+    setEditBoardCols((prevCols) => {
+      const updatedCols = prevCols.filter(
+        (_, index) => index !== indexToRemove
+      );
+      return updatedCols;
+    });
+  };
+
   return (
     <ul className="flex flex-col gap-3 mb-3">
       {editBoardCols.map((col, index) => {
@@ -49,7 +60,7 @@ const EditBoardCols = ({
                 darkMode ? "bg-darkMode text-white" : "bg-white text-black"
               }`}
             />
-            <button type="button" className="ml-5">
+            <button onClick={() => handleRemoveCol(index)} type="button" className="ml-5">
               <img src={crossIcon} alt="remove icon" />
             </button>
           </li>
