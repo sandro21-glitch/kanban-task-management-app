@@ -32,6 +32,7 @@ const ClearBoard = () => {
           clear
         </button>
         <button
+          onClick={() => dispatch(setOpenClearPopup(false))}
           className={`w-full ${
             darkMode ? "bg-white" : "bg-lightPurple"
           }   py-2 rounded-full capitalize font-bold text-mediumPurple`}
