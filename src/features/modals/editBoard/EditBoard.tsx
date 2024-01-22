@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import {
   editBoardName,
   editedBoardCols,
+  removeBoardCols,
   selectActiveBoard,
 } from "../../board/boardsSlice";
 import EditBoardCols from "./EditBoardCols";
@@ -20,16 +21,24 @@ const EditBoard = () => {
   if (!activeBoard) return null;
   const { name, boardTodos } = activeBoard;
 
+  const editBoard = () => {
+    try {
+      dispatch(editedBoardCols(editBoardCols));
+      dispatch(editBoardName(editedBoardName));
+      dispatch(removeBoardCols());
+      dispatch(setEditBoardModal(false));
+    } catch (error) {
+      console.error("An error occurred while editing the board:", error);
+    }
+  };
   const handleEditBoard = () => {
-    // Check if there is any empty column in editBoardCols
-    const hasEmptyColumn = editBoardCols.some((col) => col.trim() === "");
+    // check if there is any empty column in editBoardCols
+    const hasEmptyColumn = editBoardCols.some((col) => col === "");
     if (hasEmptyColumn) {
       alert("Please fill in all todo names before saving.");
       return;
     }
-    dispatch(editedBoardCols(editBoardCols));
-    dispatch(editBoardName(editedBoardName));
-    dispatch(setEditBoardModal(false));
+    editBoard();
   };
 
   return (
