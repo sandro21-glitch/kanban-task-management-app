@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../hooks/reduxHooks";
-import { setEditBoardModal } from "../modalsSlice";
+import { setEditBoardModal, setOpenClearPopup } from "../modalsSlice";
 
 const EditBoardPopup = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,10 @@ const EditBoardPopup = () => {
       >
         Edit Baord
       </li>
-      <li className="text-[.8rem] font-medium text-lightGray hover:text-black transition-colors ease-in duration-150">
+      <li
+        onClick={() => dispatch(setOpenClearPopup(true))}
+        className="text-[.8rem] font-medium text-lightGray hover:text-black transition-colors ease-in duration-150"
+      >
         Clear Board
       </li>
       <li className="text-[.8rem] font-medium text-red-500">Delete Board</li>
