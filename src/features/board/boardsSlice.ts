@@ -21,7 +21,6 @@ export interface BoardState {
   }[];
 }
 
-
 const initialState: BoardState = {
   boards: [
     {
@@ -125,14 +124,23 @@ export const boardSlice = createSlice({
     },
     editedBoardCols: (state, action: PayloadAction<string[]>) => {
       const activeBoard = state.boards.find((board) => board.isActive);
+
       if (activeBoard) {
-        activeBoard.boardTodos.map((todo, index) => {
-          if (action.payload[index]) {
-            todo.todoName = action.payload[index];
-          }
-        });
+        const newTodos = action.payload
+          .filter((_, index) => !activeBoard.boardTodos[index])
+          .map((newTodo) => ({
+            todoName: newTodo,
+            todoTasks: [],
+          }));
+        activeBoard.boardTodos.push(...newTodos);
+
+        activeBoard.boardTodos = activeBoard.boardTodos.map((todo, index) => ({
+          ...todo,
+          todoName: action.payload[index],
+        }));
       }
     },
+
     editBoardName: (state, action: PayloadAction<string>) => {
       const activeBoard = state.boards.find((board) => board.isActive);
       if (activeBoard) {
