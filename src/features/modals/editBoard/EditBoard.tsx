@@ -21,6 +21,12 @@ const EditBoard = () => {
   const { name, boardTodos } = activeBoard;
 
   const handleEditBoard = () => {
+    // Check if there is any empty column in editBoardCols
+    const hasEmptyColumn = editBoardCols.some((col) => col.trim() === "");
+    if (hasEmptyColumn) {
+      alert("Please fill in all todo names before saving.");
+      return;
+    }
     dispatch(editedBoardCols(editBoardCols));
     dispatch(editBoardName(editedBoardName));
     dispatch(setEditBoardModal(false));
@@ -52,7 +58,10 @@ const EditBoard = () => {
         setEditBoardCols={setEditBoardCols}
         boardTodos={boardTodos}
       />
-      <AddNewColumnBtn />
+      <AddNewColumnBtn
+        editBoardCols={editBoardCols}
+        setEditBoardCols={setEditBoardCols}
+      />
       <EditBoardBtn handleEditBoard={handleEditBoard} />
     </div>
   );
