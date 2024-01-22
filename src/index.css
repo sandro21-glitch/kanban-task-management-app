@@ -22,7 +22,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-family: "Plus Jakarta Sans", sans-serif;
   color: var(--main-color);
-  overflow: hidden;
+  overflow-y: hidden;
 }
 img,
 picture,
