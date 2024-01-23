@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
+import ModalInput from "../../../ui/ModalInput";
 type BoardNameTypes = {
   editedBoardName: string;
   setEditedBoardName: (name: string) => void;
@@ -25,15 +26,11 @@ const EditBoardName = ({
       >
         {name}
       </label>
-      <input
+      <ModalInput
         id="boardName"
-        type="text"
-        placeholder="e.g Web Development"
         value={editedBoardName}
-        onChange={(e) => setEditedBoardName(e.target.value)}
-        className={`outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
-          darkMode ? "bg-darkMode text-white" : "bg-white text-black"
-        }`}
+        onChange={setEditedBoardName}
+        placeholder="e.g Web Development"
       />
     </div>
   );
