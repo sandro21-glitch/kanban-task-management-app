@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useAppSelector } from "../../../hooks/reduxHooks";
 import ModalInput from "../../../ui/ModalInput";
+import ModalLabel from "../../../ui/ModalLabel";
 type BoardNameTypes = {
   editedBoardName: string;
   setEditedBoardName: (name: string) => void;
@@ -11,21 +11,12 @@ const EditBoardName = ({
   setEditedBoardName,
   name,
 }: BoardNameTypes) => {
-  const darkMode = useAppSelector((store) => store.theme.darkMode);
-
   useEffect(() => {
     setEditedBoardName(name);
   }, [name]);
   return (
     <div className="flex flex-col mb-5">
-      <label
-        htmlFor="boardName"
-        className={`${
-          darkMode ? "text-white" : "text-lightGray"
-        } font-semibold text-[.8rem] mb-1`}
-      >
-        {name}
-      </label>
+      <ModalLabel forId="boardName" name={name} />
       <ModalInput
         id="boardName"
         value={editedBoardName}
