@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../../hooks/reduxHooks";
+import ModalInput from "../../../ui/ModalInput";
 type BoardNameTypes = {
   setBoardName: (name: string) => void;
   boardName: string;
@@ -8,21 +9,18 @@ const BoardName = ({ setBoardName, boardName }: BoardNameTypes) => {
   return (
     <div className="flex flex-col mb-5">
       <label
-        htmlFor=""
+        htmlFor="boardName"
         className={`${
           darkMode ? "text-white" : "text-lightGray"
         } font-semibold text-[.8rem] mb-1`}
       >
         Board Name
       </label>
-      <input
-        type="text"
+      <ModalInput
+        id="boardName"
         placeholder="e.g Web Development"
         value={boardName}
-        onChange={(e) => setBoardName(e.target.value)}
-        className={`outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
-          darkMode ? "bg-darkMode text-white" : "bg-white text-black"
-        }`}
+        onChange={setBoardName}
       />
     </div>
   );
