@@ -3,7 +3,7 @@ import Sidebar from "../features/sidebar/Sidebar";
 
 const Home = () => {
   return (
-    <section className="flex w-full min-h-full relative overflow-y-hidden">
+    <section className="flex w-full min-h-full relative">
       <Sidebar />
       <Board />
     </section>
