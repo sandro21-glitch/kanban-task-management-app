@@ -1,6 +1,7 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
+import { ActiveStatus } from "../modals/addTask/AddNewTask";
 
 export interface BoardState {
   boards: {
@@ -20,7 +21,14 @@ export interface BoardState {
     }[];
   }[];
 }
-
+interface TaskType {
+  taskName: string;
+  taskDesc: string;
+  subtasks: {
+    subtaskName: string;
+    isCompleted: boolean;
+  }[];
+}
 const initialState: BoardState = {
   boards: [
     {
@@ -159,6 +167,24 @@ export const boardSlice = createSlice({
         activeBoard.boardTodos = [];
       }
     },
+    addNewTask: (
+      state,
+      action: PayloadAction<{ todoTask: TaskType; activeStatus: ActiveStatus }>
+    ) => {
+      const activeBoard = state.boards.find((board) => board.isActive);
+      const { todoTask, activeStatus } = action.payload;
+    
+      if (activeBoard) {
+        console.log(todoTask,activeStatus)
+        // Add the new task to the active board
+        activeBoard.boardTodos.map((todo,index) => {
+          if (todo.todoName.toLowerCase() === activeStatus.statusName.toLowerCase() && activeStatus.index === index) {
+            todo.todoTasks.push(todoTask)
+          }
+        });
+      }
+    },
+    
   },
 });
 
@@ -169,6 +195,7 @@ export const {
   editBoardName,
   removeBoardCols,
   clearBoard,
+  addNewTask,
 } = boardSlice.actions;
 
 // selects only the active boards from the Redux state.
