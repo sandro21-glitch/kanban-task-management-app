@@ -1,13 +1,15 @@
-import { useState } from "react";
 import ModalLabel from "../../../ui/ModalLabel";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import crossIcon from "/assets/icon-cross.svg";
-const Subtasks = () => {
+type SubtaskTypes = {
+  subtasks: string[];
+  setSubtasks: (task: string[]) => void;
+};
+const Subtasks = ({ subtasks, setSubtasks }: SubtaskTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
-  const [subtasks, setSubtasks] = useState<string[]>([]);
 
   const handleAddSubtask = () => {
-    setSubtasks([...subtasks, ""]);
+    setSubtasks([...subtasks, "Task"]);
   };
 
   const handleRemoveSubtask = (index: number) => {
