@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { selectActiveBoard } from "../../board/boardsSlice";
-interface ActiveStatus {
-  statusName: string;
-  index: number | null;
-}
-const SelectCol = () => {
+import { ActiveStatus } from "./AddNewTask";
+type ColTypes = {
+  activeStatus: ActiveStatus;
+  setActiveStatus: React.Dispatch<React.SetStateAction<ActiveStatus>>;
+};
+const SelectCol = ({ activeStatus, setActiveStatus }: ColTypes) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [activeStatus, setActiveStatus] = useState<ActiveStatus>({
-    statusName: "",
-    index: null,
-  });
+
   const activeBoard = useAppSelector(selectActiveBoard);
 
   const handleToggleMenu = () => {
