@@ -14,11 +14,7 @@ const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   if (todoTasks.length === 0) return null;
   return (
-    <div
-      className={`w-[280px] ${
-        darkMode ? "bg-darkMode" : "bg-white"
-      } mt-5 py-6 px-4 rounded-lg shadow-xl cursor-pointer group`}
-    >
+    <>
       {todoTasks.map((task, index) => {
         const { taskName, subtasks } = task;
         // Filter completed subtasks
@@ -26,7 +22,12 @@ const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
           (subtask) => subtask.isCompleted
         );
         return (
-          <div key={index}>
+          <div
+            key={index}
+            className={`w-[280px] ${
+              darkMode ? "bg-darkMode" : "bg-white"
+            } mt-5 py-6 px-4 rounded-lg shadow-xl cursor-pointer group `}
+          >
             <p
               className={`group-hover:text-mediumPurple
              ${
@@ -41,7 +42,7 @@ const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 
