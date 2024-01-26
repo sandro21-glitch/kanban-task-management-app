@@ -7,6 +7,7 @@ export interface CounterState {
   openEditPopup: boolean;
   openClearPopup: boolean;
   newTaskModal: boolean;
+  openTaskOptions: boolean;
 }
 
 const initialState: CounterState = {
@@ -15,6 +16,7 @@ const initialState: CounterState = {
   openEditPopup: false,
   openClearPopup: false,
   newTaskModal: false,
+  openTaskOptions: true,
 };
 
 export const modalsSlice = createSlice({
@@ -36,16 +38,19 @@ export const modalsSlice = createSlice({
     setNewTaskModal: (state, action: PayloadAction<boolean>) => {
       state.newTaskModal = action.payload;
     },
+    setOpenTaskOptions: (state, action: PayloadAction<boolean>) => {
+      state.openTaskOptions = action.payload;
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   setAddBoardModal,
   setEditBoardModal,
   openEditBoardPopModal,
   setOpenClearPopup,
   setNewTaskModal,
+  setOpenTaskOptions,
 } = modalsSlice.actions;
 
 export default modalsSlice.reducer;
