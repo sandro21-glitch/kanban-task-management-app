@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/reduxHooks";
+import SingelTask from "./SingelTask";
 
 type TaskDetailsTypes = {
   todoTasks: {
@@ -11,10 +11,9 @@ type TaskDetailsTypes = {
   }[];
 };
 const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
-  const darkMode = useAppSelector((store) => store.theme.darkMode);
   if (todoTasks.length === 0) return null;
   return (
-    <>
+    <div>
       {todoTasks.map((task, index) => {
         const { taskName, subtasks } = task;
         // Filter completed subtasks
@@ -22,27 +21,15 @@ const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
           (subtask) => subtask.isCompleted
         );
         return (
-          <div
+          <SingelTask
             key={index}
-            className={`w-[280px] ${
-              darkMode ? "bg-darkMode" : "bg-white"
-            } mt-5 py-6 px-4 rounded-lg shadow-xl cursor-pointer group `}
-          >
-            <p
-              className={`group-hover:text-mediumPurple
-             ${
-               darkMode ? "text-white" : "text-black"
-             } text-[.9rem] font-semibold transition-colors ease-in duration-150`}
-            >
-              {taskName}
-            </p>
-            <p>
-              {completedSubtasks.length} of {subtasks.length}
-            </p>
-          </div>
+            taskName={taskName}
+            completedLength={completedSubtasks.length}
+            subtasksLength={subtasks.length}
+          />
         );
       })}
-    </>
+    </div>
   );
 };
 
