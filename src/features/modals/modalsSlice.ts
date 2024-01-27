@@ -16,7 +16,7 @@ const initialState: CounterState = {
   openEditPopup: false,
   openClearPopup: false,
   newTaskModal: false,
-  openTaskOptions: true,
+  openTaskOptions: false,
 };
 
 export const modalsSlice = createSlice({
