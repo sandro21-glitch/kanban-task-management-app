@@ -7,13 +7,13 @@ import {
   setEditBoardModal,
   setNewTaskModal,
   setOpenClearPopup,
-  setOpenTaskOptions,
+  // setOpenTaskOptions,
 } from "./modalsSlice";
 import useOutsideClick from "../../hooks/useClickOutside";
 import EditBoard from "./editBoard/EditBoard";
 import ClearBoard from "./clearBoard/ClearBoard";
 import AddNewTask from "./addTask/AddNewTask";
-import TaskOptions from "./taskSubtasks/TaskOptions";
+// import TaskOptions from "./taskSubtasks/TaskOptions";
 
 const Modals = () => {
   const {
@@ -21,15 +21,12 @@ const Modals = () => {
     editBoardModal,
     openClearPopup,
     newTaskModal,
-    openTaskOptions,
+    // openTaskOptions,
   } = useAppSelector((store) => store.modals);
 
   const isAnyModalOpen =
-    addBoardModal ||
-    editBoardModal ||
-    openClearPopup ||
-    newTaskModal ||
-    openTaskOptions;
+    addBoardModal || editBoardModal || openClearPopup || newTaskModal;
+  // openTaskOptions;
 
   const modalRef = useRef(null);
 
@@ -42,7 +39,7 @@ const Modals = () => {
     dispatch(openEditBoardPopModal(false));
     dispatch(setOpenClearPopup(false));
     dispatch(setNewTaskModal(false));
-    dispatch(setOpenTaskOptions(false));
+    // dispatch(setOpenTaskOptions(false));
   };
 
   // Attach the useOutsideClick hook to the modal container
@@ -63,7 +60,7 @@ const Modals = () => {
         {editBoardModal && <EditBoard />}
         {openClearPopup && <ClearBoard />}
         {newTaskModal && <AddNewTask />}
-        {openTaskOptions && <TaskOptions />}
+        {/* {openTaskOptions && <TaskOptions />} */}
       </section>
     </div>
   );
