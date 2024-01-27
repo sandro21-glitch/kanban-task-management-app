@@ -1,18 +1,24 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setOpenTaskOptions } from "../modals/modalsSlice";
+import TaskOptions from "../modals/taskSubtasks/TaskOptions";
 
 type SingleTaskTypes = {
   taskName: string;
   completedLength: number;
   subtasksLength: number;
+  taskDesc?: string;
+  subtasks: { subtaskName: string; isCompleted: boolean }[];
 };
 const SingelTask = ({
   taskName,
   completedLength,
   subtasksLength,
+  taskDesc,
+  subtasks,
 }: SingleTaskTypes) => {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+  const { openTaskOptions } = useAppSelector((store) => store.modals);
   return (
     <div
       onClick={() => dispatch(setOpenTaskOptions(true))}
@@ -31,6 +37,13 @@ const SingelTask = ({
       <p>
         {completedLength} of {subtasksLength}
       </p>
+      {openTaskOptions && (
+        <TaskOptions
+          taskName={taskName}
+          subtasks={subtasks}
+          taskDesc={taskDesc}
+        />
+      )}
     </div>
   );
 };
