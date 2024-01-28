@@ -1,5 +1,7 @@
 import { useAppSelector } from "../../../hooks/reduxHooks";
+import OptionsHeader from "./OptionsHeader";
 import SingleSubtask from "./SingleSubtask";
+
 type TaskOptionTypes = {
   taskName: string;
   taskDesc?: string;
@@ -17,10 +19,7 @@ const TaskOptions = ({ taskName, taskDesc, subtasks }: TaskOptionTypes) => {
             darkMode ? "bg-darkMode" : "bg-white"
           } p-7 rounded-lg`}
         >
-          <div className="flex justify-between items-center mb-5">
-            <h5 className="font-bold">{taskName}</h5>
-            <button>X</button>
-          </div>
+          <OptionsHeader taskName={taskName} />
           <p className="text-[.8rem] mb-5">{taskDesc}</p>
           <p className="text-[.75rem] font-bold mb-2">
             Subtasks ({completedSubs} of {subtasks.length})
