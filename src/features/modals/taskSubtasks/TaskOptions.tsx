@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import OptionsHeader from "./OptionsHeader";
 import SingleSubtask from "./SingleSubtask";
+import SubtasksList from "./SubtasksList";
 
 type TaskOptionTypes = {
   taskName: string;
@@ -24,17 +25,7 @@ const TaskOptions = ({ taskName, taskDesc, subtasks }: TaskOptionTypes) => {
           <p className="text-[.75rem] font-bold mb-2">
             Subtasks ({completedSubs} of {subtasks.length})
           </p>
-          <ul className="flex flex-col gap-3">
-            {subtasks.map((subtask, index) => {
-              return (
-                <SingleSubtask
-                  key={index}
-                  completed={subtask.isCompleted}
-                  subtaskName={subtask.subtaskName}
-                />
-              );
-            })}
-          </ul>
+          <SubtasksList subtasks={subtasks} />
         </div>
       </section>
     </div>
