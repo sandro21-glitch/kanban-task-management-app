@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../../hooks/reduxHooks";
+import SingleSubtask from "./SingleSubtask";
 type TaskOptionTypes = {
   taskName: string;
   taskDesc?: string;
@@ -27,21 +28,11 @@ const TaskOptions = ({ taskName, taskDesc, subtasks }: TaskOptionTypes) => {
           <ul className="flex flex-col gap-3">
             {subtasks.map((subtask, index) => {
               return (
-                <li
+                <SingleSubtask
                   key={index}
-                  className={`flex items-center gap-2 ${
-                    subtask.isCompleted ? "bg-[#f4f7fd]" : "bg-lightPurple"
-                  } p-3 rounded-lg`}
-                >
-                  <input type="checkbox" checked={subtask.isCompleted} />
-                  <div
-                    className={`${
-                      subtask.isCompleted ? "line-through" : "text-black"
-                    } text-[.75rem] font-semibold`}
-                  >
-                    {subtask.subtaskName}
-                  </div>
-                </li>
+                  completed={subtask.isCompleted}
+                  subtaskName={subtask.subtaskName}
+                />
               );
             })}
           </ul>
