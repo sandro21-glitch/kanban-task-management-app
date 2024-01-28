@@ -1,6 +1,5 @@
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import OptionsHeader from "./OptionsHeader";
-import SingleSubtask from "./SingleSubtask";
 import SubtasksList from "./SubtasksList";
 
 type TaskOptionTypes = {
