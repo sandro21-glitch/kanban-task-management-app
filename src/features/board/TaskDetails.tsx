@@ -9,8 +9,9 @@ type TaskDetailsTypes = {
       isCompleted: boolean;
     }[];
   }[];
+  todoId: string;
 };
-const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
+const TaskDetails = ({ todoTasks, todoId }: TaskDetailsTypes) => {
   if (todoTasks.length === 0) return null;
   return (
     <div>
@@ -23,6 +24,7 @@ const TaskDetails = ({ todoTasks }: TaskDetailsTypes) => {
         return (
           <SingelTask
             key={index}
+            todoId={todoId}
             taskName={taskName}
             completedLength={completedSubtasks.length}
             subtasksLength={subtasks.length}
