@@ -2,6 +2,7 @@ import TaskDetails from "./TaskDetails";
 
 type TodoTasksTypes = {
   todo: {
+    todoId: string;
     todoName: string;
     todoTasks: {
       taskName: string;
@@ -15,7 +16,7 @@ type TodoTasksTypes = {
 };
 
 const TodoTasks = ({ todo }: TodoTasksTypes) => {
-  const { todoName, todoTasks } = todo;
+  const { todoName, todoTasks, todoId } = todo;
 
   return (
     <li className="min-w-[17.5em]">
@@ -25,7 +26,7 @@ const TodoTasks = ({ todo }: TodoTasksTypes) => {
           {todoName} ({todoTasks.length})
         </div>
       </div>
-      <TaskDetails todoTasks={todoTasks} />
+      <TaskDetails todoTasks={todoTasks} todoId={todoId} />
     </li>
   );
 };
