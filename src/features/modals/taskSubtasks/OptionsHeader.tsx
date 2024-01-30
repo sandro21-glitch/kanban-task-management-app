@@ -5,7 +5,7 @@ type HeaderTypes = {
 };
 const OptionsHeader = ({ taskName }: HeaderTypes) => {
   return (
-    <div className="flex justify-between items-center mb-5">
+    <div className="flex justify-between items-center mb-5 cursor-text">
       <h5 className="font-bold">{taskName}</h5>
       <button>
         <img src={vertIcon} alt="vertical icon" />
