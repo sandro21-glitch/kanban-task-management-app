@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { checkCompletedSubtask } from "../../board/boardsSlice";
 
@@ -15,18 +15,23 @@ const SingleSubtask = ({
   index,
   todoId,
 }: SubtaskTypes) => {
-  const [isCompleted, setIsCompleted] = useState(completed);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    setIsCompleted(completed);
+  }, [completed]);
   const handleChangeCheckbox = () => {
+    const updatedCompletedValue = !isCompleted;
     dispatch(checkCompletedSubtask({ checked: isCompleted, index, todoId }));
+    setIsCompleted(updatedCompletedValue);
   };
   return (
     <label
       htmlFor={subtaskName}
       onClick={handleChangeCheckbox}
       className={`flex items-center gap-2 ${
-        completed ? "bg-[#f4f7fd]" : "bg-lightPurple"
-      } p-3 rounded-lg cursor-pointer`}
+        isCompleted ? "bg-[#f4f7fd]" : "bg-lightPurple"
+      } p-3 rounded-lg`}
     >
       <input
         id={subtaskName}
