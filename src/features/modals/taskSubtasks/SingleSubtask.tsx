@@ -1,17 +1,39 @@
+import { useState } from "react";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { checkCompletedSubtask } from "../../board/boardsSlice";
 
 type SubtaskTypes = {
   completed: boolean;
   subtaskName: string;
+  index: number;
+  todoId: string;
 };
 
-const SingleSubtask = ({ completed, subtaskName }: SubtaskTypes) => {
+const SingleSubtask = ({
+  completed,
+  subtaskName,
+  index,
+  todoId,
+}: SubtaskTypes) => {
+  const [isCompleted, setIsCompleted] = useState(completed);
+  const dispatch = useAppDispatch();
+  const handleChangeCheckbox = () => {
+    dispatch(checkCompletedSubtask({ checked: isCompleted, index, todoId }));
+  };
   return (
-    <li
+    <label
+      htmlFor={subtaskName}
+      onClick={handleChangeCheckbox}
       className={`flex items-center gap-2 ${
         completed ? "bg-[#f4f7fd]" : "bg-lightPurple"
-      } p-3 rounded-lg`}
+      } p-3 rounded-lg cursor-pointer`}
     >
-      <input type="checkbox" checked={completed} />
+      <input
+        id={subtaskName}
+        type="checkbox"
+        checked={isCompleted}
+        onChange={(e) => setIsCompleted(e.target.checked)}
+      />
       <div
         className={`${
           completed ? "line-through" : "text-black"
@@ -19,7 +41,7 @@ const SingleSubtask = ({ completed, subtaskName }: SubtaskTypes) => {
       >
         {subtaskName}
       </div>
-    </li>
+    </label>
   );
 };
 
