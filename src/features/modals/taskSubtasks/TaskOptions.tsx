@@ -20,7 +20,7 @@ const TaskOptions = ({
   const dispatch = useAppDispatch();
   const { openTaskOptions } = useAppSelector((store) => store.modals);
   const darkMode = useAppSelector((store) => store.theme.darkMode);
-  const completedSubs = subtasks.filter((task) => !task.isCompleted).length;
+  const completedSubs = subtasks.filter((task) => task.isCompleted).length;
   console.log(completedSubs)
   const modalRef = useRef<HTMLDivElement>(null);
 
