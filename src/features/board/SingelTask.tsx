@@ -8,6 +8,7 @@ type SingleTaskTypes = {
   subtasksLength: number;
   taskDesc?: string;
   subtasks: { subtaskName: string; isCompleted: boolean }[];
+  todoId: string;
 };
 const SingelTask = ({
   taskName,
@@ -15,6 +16,7 @@ const SingelTask = ({
   subtasksLength,
   taskDesc,
   subtasks,
+  todoId,
 }: SingleTaskTypes) => {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
@@ -39,6 +41,7 @@ const SingelTask = ({
       </p>
       {openTaskOptions && (
         <TaskOptions
+          todoId={todoId}
           taskName={taskName}
           subtasks={subtasks}
           taskDesc={taskDesc}
