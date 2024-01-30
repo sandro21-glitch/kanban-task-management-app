@@ -2,13 +2,14 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import { ActiveStatus } from "../modals/addTask/AddNewTask";
-
+import { v4 as uuidv4 } from "uuid";
 export interface BoardState {
   boards: {
     id: number;
     name: string;
     isActive: boolean;
     boardTodos: {
+      todoId: string;
       todoName: string;
       todoTasks: {
         taskName: string;
@@ -31,72 +32,72 @@ interface TaskType {
 }
 const initialState: BoardState = {
   boards: [
-    {
-      id: 1,
-      name: "TEST BOARD 1",
-      isActive: true,
-      boardTodos: [
-        {
-          todoName: "Done",
-          todoTasks: [
-            {
-              taskName: "Task 1",
-              taskDesc: "Description 1",
-              subtasks: [
-                { subtaskName: "Subtask 1", isCompleted: false },
-                { subtaskName: "Subtask 2", isCompleted: true },
-              ],
-            },
-          ],
-        },
-        {
-          todoName: "Later",
-          todoTasks: [
-            {
-              taskName: "Task 1",
-              taskDesc: "Description 1",
-              subtasks: [
-                { subtaskName: "Subtask 1", isCompleted: false },
-                { subtaskName: "Subtask 2", isCompleted: true },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "TEST BOARD 2",
-      isActive: false,
-      boardTodos: [
-        {
-          todoName: "Done",
-          todoTasks: [
-            {
-              taskName: "Task 1",
-              taskDesc: "Description 1",
-              subtasks: [
-                { subtaskName: "Subtask 1", isCompleted: false },
-                { subtaskName: "Subtask 2", isCompleted: false },
-              ],
-            },
-          ],
-        },
-        {
-          todoName: "Later2",
-          todoTasks: [
-            {
-              taskName: "Task 1",
-              taskDesc: "Description 1",
-              subtasks: [
-                { subtaskName: "Subtask 1", isCompleted: false },
-                { subtaskName: "Subtask 2", isCompleted: false },
-              ],
-            },
-          ],
-        },
-      ],
-    },
+    // {
+    //   id: 1,
+    //   name: "TEST BOARD 1",
+    //   isActive: true,
+    //   boardTodos: [
+    //     {
+    //       todoName: "Done",
+    //       todoTasks: [
+    //         {
+    //           taskName: "Task 1",
+    //           taskDesc: "Description 1",
+    //           subtasks: [
+    //             { subtaskName: "Subtask 1", isCompleted: false },
+    //             { subtaskName: "Subtask 2", isCompleted: true },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       todoName: "Later",
+    //       todoTasks: [
+    //         {
+    //           taskName: "Task 1",
+    //           taskDesc: "Description 1",
+    //           subtasks: [
+    //             { subtaskName: "Subtask 1", isCompleted: false },
+    //             { subtaskName: "Subtask 2", isCompleted: true },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: 2,
+    //   name: "TEST BOARD 2",
+    //   isActive: false,
+    //   boardTodos: [
+    //     {
+    //       todoName: "Done",
+    //       todoTasks: [
+    //         {
+    //           taskName: "Task 1",
+    //           taskDesc: "Description 1",
+    //           subtasks: [
+    //             { subtaskName: "Subtask 1", isCompleted: false },
+    //             { subtaskName: "Subtask 2", isCompleted: false },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       todoName: "Later2",
+    //       todoTasks: [
+    //         {
+    //           taskName: "Task 1",
+    //           taskDesc: "Description 1",
+    //           subtasks: [
+    //             { subtaskName: "Subtask 1", isCompleted: false },
+    //             { subtaskName: "Subtask 2", isCompleted: false },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
   ],
 };
 
@@ -114,6 +115,7 @@ export const boardSlice = createSlice({
         isActive: false,
         boardTodos: action.payload.boardCols.map((column) => ({
           todoName: column,
+          todoId: uuidv4(),
           todoTasks: [],
         })),
       });
@@ -136,6 +138,7 @@ export const boardSlice = createSlice({
         const newTodos = action.payload
           .filter((_, index) => !activeBoard.boardTodos[index])
           .map((newTodo) => ({
+            todoId: uuidv4(),
             todoName: newTodo,
             todoTasks: [],
           }));
@@ -173,18 +176,40 @@ export const boardSlice = createSlice({
     ) => {
       const activeBoard = state.boards.find((board) => board.isActive);
       const { todoTask, activeStatus } = action.payload;
-    
+
       if (activeBoard) {
-        console.log(todoTask,activeStatus)
-        // Add the new task to the active board
-        activeBoard.boardTodos.map((todo,index) => {
-          if (todo.todoName.toLowerCase() === activeStatus.statusName.toLowerCase() && activeStatus.index === index) {
-            todo.todoTasks.push(todoTask)
+        // add the new task to the active board
+        activeBoard.boardTodos.map((todo, index) => {
+          if (
+            todo.todoName.toLowerCase() ===
+              activeStatus.statusName.toLowerCase() &&
+            activeStatus.index === index
+          ) {
+            todo.todoTasks.push(todoTask);
           }
         });
       }
     },
-    
+    checkCompletedSubtask: (
+      state,
+      action: PayloadAction<{ checked: boolean; index: number; todoId: string }>
+    ) => {
+      const activeBoard = state.boards.find((board) => board.isActive);
+      const { todoId, index, checked } = action.payload;
+      if (activeBoard) {
+        activeBoard.boardTodos.filter((todo) => {
+          if (todo.todoId === todoId) {
+            todo.todoTasks.map((todoSub) => {
+              todoSub.subtasks.map((sub, subIndex) => {
+                if (subIndex === index) {
+                  sub.isCompleted = checked;
+                }
+              });
+            });
+          }
+        });
+      }
+    },
   },
 });
 
@@ -196,14 +221,15 @@ export const {
   removeBoardCols,
   clearBoard,
   addNewTask,
+  checkCompletedSubtask,
 } = boardSlice.actions;
 
 // selects only the active boards from the Redux state.
 export const selectActiveBoard = createSelector(
   (state: RootState) => state.board.boards,
   (boards) => {
-    const firstActiveBoard = boards.find((board) => board.isActive);
-    return firstActiveBoard || null;
+    const activeBoard = boards.find((board) => board.isActive);
+    return activeBoard || null;
   }
 );
 
