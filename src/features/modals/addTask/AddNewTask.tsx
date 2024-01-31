@@ -7,6 +7,7 @@ import Subtasks from "./Subtasks";
 import SelectCol from "./SelectCol";
 import CreateTaskBtn from "./CreateTaskBtn";
 import { addNewTask } from "../../board/boardsSlice";
+import { setNewTaskModal } from "../modalsSlice";
 export interface ActiveStatus {
   statusName: string;
   index: number | null;
@@ -39,6 +40,7 @@ const AddNewTask = () => {
       activeStatus.index !== null
     ) {
       dispatch(addNewTask({ todoTask, activeStatus }));
+      dispatch(setNewTaskModal(false))
     }
   };
 
@@ -66,8 +68,7 @@ const AddNewTask = () => {
           activeStatus={activeStatus}
           setActiveStatus={setActiveStatus}
         />
-        <CreateTaskBtn />
-        <button onClick={() => handleAddSubtask()}>Click test</button>
+        <CreateTaskBtn handleAddSubtask={handleAddSubtask} />
       </div>
     </article>
   );
