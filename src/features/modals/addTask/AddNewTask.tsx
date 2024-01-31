@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { v4 as uuidv4 } from "uuid";
 import TaskName from "./TaskName";
 import TaskDescription from "./TaskDescription";
 import Subtasks from "./Subtasks";
@@ -25,6 +26,7 @@ const AddNewTask = () => {
     taskName: taskName,
     taskDesc: taskDescription,
     subtasks: subtasks.map((subtask) => ({
+      subtaskId: uuidv4(),
       subtaskName: subtask,
       isCompleted: false,
     })),
