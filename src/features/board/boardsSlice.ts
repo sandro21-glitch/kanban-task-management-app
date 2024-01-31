@@ -15,6 +15,7 @@ export interface BoardState {
         taskName: string;
         taskDesc: string;
         subtasks: {
+          subtaskId: string;
           subtaskName: string;
           isCompleted: boolean;
         }[];
@@ -26,6 +27,7 @@ interface TaskType {
   taskName: string;
   taskDesc: string;
   subtasks: {
+    subtaskId: string;
     subtaskName: string;
     isCompleted: boolean;
   }[];
@@ -192,16 +194,20 @@ export const boardSlice = createSlice({
     },
     checkCompletedSubtask: (
       state,
-      action: PayloadAction<{ checked: boolean; index: number; todoId: string }>
+      action: PayloadAction<{
+        checked: boolean;
+        subtaskId: string;
+        todoId: string;
+      }>
     ) => {
       const activeBoard = state.boards.find((board) => board.isActive);
-      const { todoId, index, checked } = action.payload;
+      const { todoId, subtaskId, checked } = action.payload;
       if (activeBoard) {
-        activeBoard.boardTodos.filter((todo) => {
+        activeBoard.boardTodos.map((todo) => {
           if (todo.todoId === todoId) {
             todo.todoTasks.map((todoSub) => {
-              todoSub.subtasks.map((sub, subIndex) => {
-                if (subIndex === index) {
+              todoSub.subtasks.map((sub) => {
+                if (sub.subtaskId === subtaskId) {
                   sub.isCompleted = checked;
                 }
               });
