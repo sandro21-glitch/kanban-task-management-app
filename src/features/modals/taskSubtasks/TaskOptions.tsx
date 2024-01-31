@@ -1,14 +1,15 @@
 import { useRef, useEffect, useCallback } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppSelector } from "../../../hooks/reduxHooks";
 import OptionsHeader from "./OptionsHeader";
 import SubtasksList from "./SubtasksList";
-import { setOpenTaskOptions } from "../modalsSlice";
 
 type TaskOptionTypes = {
   taskName: string;
   taskDesc?: string;
-  subtasks: { subtaskName: string; isCompleted: boolean }[];
+  subtasks: { subtaskId: string; subtaskName: string; isCompleted: boolean }[];
   todoId: string;
+  localOpenTaskOptions: boolean;
+  setLocalOpenTaskOptions: (open: boolean) => void;
 };
 
 const TaskOptions = ({
@@ -16,16 +17,15 @@ const TaskOptions = ({
   taskDesc,
   subtasks,
   todoId,
+  localOpenTaskOptions,
+  setLocalOpenTaskOptions,
 }: TaskOptionTypes) => {
-  const dispatch = useAppDispatch();
-  const { openTaskOptions } = useAppSelector((store) => store.modals);
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   const completedSubs = subtasks.filter((task) => task.isCompleted).length;
-  console.log(completedSubs)
   const modalRef = useRef<HTMLDivElement>(null);
 
   const closeModal = () => {
-    dispatch(setOpenTaskOptions(false));
+    setLocalOpenTaskOptions(false);
   };
 
   const handleOutsideClick = useCallback(
@@ -49,14 +49,14 @@ const TaskOptions = ({
   );
 
   useEffect(() => {
-    if (openTaskOptions) {
+    if (localOpenTaskOptions) {
       document.addEventListener("mousedown", handleOutsideClick);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [openTaskOptions, handleOutsideClick]);
+  }, [localOpenTaskOptions, handleOutsideClick]);
 
   return (
     <div className="w-screen h-screen fixed inset-0 z-[99999] flex justify-center">
