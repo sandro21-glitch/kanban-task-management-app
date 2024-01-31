@@ -35,19 +35,21 @@ const Navbar = () => {
           darkMode ? "border-b-mediumDark" : null
         } flex items-center`}
       >
-        <ul className="flex items-center justify-between w-full mx-5 ">
-          <li
-            className={`text-[1.5rem] font-bold ${
-              darkMode ? "text-white" : "text-black"
-            }`}
-          >
-            {activeBoardName}
-          </li>
-          <li className="flex items-center gap-5">
-            <AddNewTaskBtn />
-            <BoardControls />
-          </li>
-        </ul>
+        {boards.length < 1 ? null : (
+          <ul className="flex items-center justify-between w-full mx-5 ">
+            <li
+              className={`text-[1.5rem] font-bold ${
+                darkMode ? "text-white" : "text-black"
+              }`}
+            >
+              {activeBoardName}
+            </li>
+            <li className="flex items-center gap-5">
+              <AddNewTaskBtn />
+              <BoardControls />
+            </li>
+          </ul>
+        )}
       </div>
     </nav>
   );
