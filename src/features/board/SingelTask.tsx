@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setOpenTaskOptions } from "../modals/modalsSlice";
 import TaskOptions from "../modals/taskSubtasks/TaskOptions";
@@ -10,6 +11,7 @@ type SingleTaskTypes = {
   subtasks: { subtaskName: string; isCompleted: boolean }[];
   todoId: string;
 };
+
 const SingelTask = ({
   taskName,
   completedLength,
@@ -20,10 +22,14 @@ const SingelTask = ({
 }: SingleTaskTypes) => {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
-  const { openTaskOptions } = useAppSelector((store) => store.modals);
+  const [localOpenTaskOptions, setLocalOpenTaskOptions] = useState(false);
+
   return (
     <div
-      onClick={() => dispatch(setOpenTaskOptions(true))}
+      onClick={() => {
+        dispatch(setOpenTaskOptions(true));
+        setLocalOpenTaskOptions(true);
+      }}
       className={`w-[280px] ${
         darkMode ? "bg-darkMode" : "bg-white"
       } mt-5 py-6 px-4 rounded-lg shadow-xl cursor-pointer group `}
@@ -39,8 +45,10 @@ const SingelTask = ({
       <p>
         {completedLength} of {subtasksLength}
       </p>
-      {openTaskOptions && (
+      {localOpenTaskOptions && (
         <TaskOptions
+          localOpenTaskOptions={localOpenTaskOptions}
+          setLocalOpenTaskOptions={setLocalOpenTaskOptions}
           todoId={todoId}
           taskName={taskName}
           subtasks={subtasks}
