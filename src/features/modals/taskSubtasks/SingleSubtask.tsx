@@ -1,47 +1,43 @@
-import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { checkCompletedSubtask } from "../../board/boardsSlice";
 
 type SubtaskTypes = {
-  completed: boolean;
   subtaskName: string;
-  index: number;
+  subtaskId: string;
   todoId: string;
+  isCompleted: boolean;
 };
 
 const SingleSubtask = ({
-  completed,
   subtaskName,
-  index,
+  subtaskId,
   todoId,
+  isCompleted,
 }: SubtaskTypes) => {
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    setIsCompleted(completed);
-  }, [completed]);
+
   const handleChangeCheckbox = () => {
-    const updatedCompletedValue = !isCompleted;
-    dispatch(checkCompletedSubtask({ checked: isCompleted, index, todoId }));
-    setIsCompleted(updatedCompletedValue);
+    dispatch(
+      checkCompletedSubtask({ checked: !isCompleted, subtaskId, todoId })
+    );
   };
+
   return (
     <label
-      htmlFor={subtaskName}
-      onClick={handleChangeCheckbox}
+      htmlFor={subtaskId}
       className={`flex items-center gap-2 ${
         isCompleted ? "bg-[#f4f7fd]" : "bg-lightPurple"
       } p-3 rounded-lg`}
     >
       <input
-        id={subtaskName}
+        id={subtaskId}
         type="checkbox"
         checked={isCompleted}
-        onChange={(e) => setIsCompleted(e.target.checked)}
+        onChange={handleChangeCheckbox}
       />
       <div
         className={`${
-          completed ? "line-through" : "text-black"
+          isCompleted ? "line-through" : "text-black"
         } text-[.75rem] font-semibold`}
       >
         {subtaskName}
