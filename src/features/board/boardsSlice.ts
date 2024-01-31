@@ -114,7 +114,7 @@ export const boardSlice = createSlice({
       state.boards.push({
         id: state.boards.length + 1,
         name: action.payload.boardName,
-        isActive: false,
+        isActive: state.boards.length === 0 ? true : false,
         boardTodos: action.payload.boardCols.map((column) => ({
           todoName: column,
           todoId: uuidv4(),
@@ -127,6 +127,7 @@ export const boardSlice = createSlice({
       const findActiveBoard = boards.find(
         (board) => board.id === action.payload
       );
+
       if (findActiveBoard) {
         state.boards = boards.map((board) => ({
           ...board,
