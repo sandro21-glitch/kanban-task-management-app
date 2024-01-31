@@ -2,6 +2,7 @@ import SingleSubtask from "./SingleSubtask";
 
 type SubtaskLists = {
   subtasks: {
+    subtaskId: string;
     subtaskName: string;
     isCompleted: boolean;
   }[];
@@ -11,13 +12,14 @@ type SubtaskLists = {
 const SubtasksList = ({ subtasks, todoId }: SubtaskLists) => {
   return (
     <ul className="flex flex-col gap-3">
-      {subtasks.map((subtask, index) => {
+      {subtasks.map((subtask) => {
+        const { subtaskId, isCompleted } = subtask;
         return (
           <SingleSubtask
-            key={index}
+            key={subtaskId}
+            isCompleted={isCompleted}
+            subtaskId={subtaskId}
             todoId={todoId}
-            index={index}
-            completed={subtask.isCompleted}
             subtaskName={subtask.subtaskName}
           />
         );
