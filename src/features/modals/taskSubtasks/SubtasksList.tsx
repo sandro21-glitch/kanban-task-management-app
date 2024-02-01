@@ -11,7 +11,7 @@ type SubtaskLists = {
 
 const SubtasksList = ({ subtasks, todoId }: SubtaskLists) => {
   return (
-    <ul className="flex flex-col gap-3">
+    <ul className="flex flex-col gap-3 mb-5">
       {subtasks.map((subtask) => {
         const { subtaskId, isCompleted } = subtask;
         return (
