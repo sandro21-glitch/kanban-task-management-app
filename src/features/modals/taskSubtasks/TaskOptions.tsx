@@ -2,6 +2,7 @@ import { useRef, useEffect, useCallback } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import OptionsHeader from "./OptionsHeader";
 import SubtasksList from "./SubtasksList";
+import SubtasksCurrStatus from "./SubtasksCurrStatus";
 
 type TaskOptionTypes = {
   taskName: string;
@@ -42,7 +43,7 @@ const TaskOptions = ({
 
   const handleInsideClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      // Prevent clicks inside the modal from closing it
+      // prevent clicks inside the modal from closing it
       event.stopPropagation();
     },
     []
@@ -79,6 +80,7 @@ const TaskOptions = ({
             Subtasks ({completedSubs} of {subtasks.length})
           </p>
           <SubtasksList subtasks={subtasks} todoId={todoId} />
+          <SubtasksCurrStatus todoId={todoId} />
         </div>
       </section>
     </div>
