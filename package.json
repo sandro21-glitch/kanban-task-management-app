@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "@types/randomcolor": "^0.5.9",
     "@types/react-onclickoutside": "^6.7.6",
     "@types/uuid": "^9.0.8",
+    "randomcolor": "^0.6.2",
     "react": "^18.2.0",
     "react-detect-click-outside": "^1.1.7",
     "react-dom": "^18.2.0",
