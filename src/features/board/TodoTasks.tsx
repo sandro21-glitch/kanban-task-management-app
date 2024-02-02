@@ -6,8 +6,10 @@ type TodoTasksTypes = {
     todoTasks: {
       taskName: string;
       taskDesc: string;
+      taskId: string;
       subtasks: {
         subtaskName: string;
+        subtaskId: string;
         isCompleted: boolean;
       }[];
     }[];
