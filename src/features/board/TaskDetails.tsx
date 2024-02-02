@@ -4,8 +4,10 @@ type TaskDetailsTypes = {
   todoTasks: {
     taskName: string;
     taskDesc: string;
+    taskId: string;
     subtasks: {
       subtaskName: string;
+      subtaskId: string;
       isCompleted: boolean;
     }[];
   }[];
@@ -16,7 +18,7 @@ const TaskDetails = ({ todoTasks, todoId }: TaskDetailsTypes) => {
   return (
     <div>
       {todoTasks.map((task, index) => {
-        const { taskName, subtasks, taskDesc } = task;
+        const { taskName, subtasks, taskDesc, taskId } = task;
         // Filter completed subtasks
         const completedSubtasks = subtasks.filter(
           (subtask) => subtask.isCompleted
@@ -26,6 +28,7 @@ const TaskDetails = ({ todoTasks, todoId }: TaskDetailsTypes) => {
             key={index}
             todoId={todoId}
             taskName={taskName}
+            taskId={taskId}
             completedLength={completedSubtasks.length}
             subtasksLength={subtasks.length}
             subtasks={subtasks}
