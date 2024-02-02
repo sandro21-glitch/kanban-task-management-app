@@ -26,6 +26,7 @@ const AddNewTask = () => {
   const todoTask = {
     taskName: taskName,
     taskDesc: taskDescription,
+    taskId: uuidv4(),
     subtasks: subtasks.map((subtask) => ({
       subtaskId: uuidv4(),
       subtaskName: subtask,
@@ -40,7 +41,7 @@ const AddNewTask = () => {
       activeStatus.index !== null
     ) {
       dispatch(addNewTask({ todoTask, activeStatus }));
-      dispatch(setNewTaskModal(false))
+      dispatch(setNewTaskModal(false));
     }
   };
 
