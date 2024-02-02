@@ -1,23 +1,24 @@
 export interface BoardState {
-    boards: {
-      id: number;
-      name: string;
-      isActive: boolean;
-      boardTodos: {
-        todoId: string;
-        todoName: string;
-        todoTasks: {
-          taskName: string;
-          taskDesc: string;
-          subtasks: {
-            subtaskId: string;
-            subtaskName: string;
-            isCompleted: boolean;
-          }[];
+  boards: {
+    id: number;
+    name: string;
+    isActive: boolean;
+    boardTodos: {
+      todoId: string;
+      todoName: string;
+      todoTasks: {
+        taskName: string;
+        taskDesc: string;
+        taskId: string;
+        subtasks: {
+          subtaskId: string;
+          subtaskName: string;
+          isCompleted: boolean;
         }[];
       }[];
     }[];
-  }
+  }[];
+}
 
 export interface BoardTodos {
   todoId: string;
@@ -25,6 +26,7 @@ export interface BoardTodos {
   todoTasks: {
     taskName: string;
     taskDesc: string;
+    taskId: string;
     subtasks: {
       subtaskId: string;
       subtaskName: string;
@@ -36,6 +38,7 @@ export interface BoardTodos {
 export interface TaskType {
   taskName: string;
   taskDesc: string;
+  taskId: string;
   subtasks: {
     subtaskId: string;
     subtaskName: string;
