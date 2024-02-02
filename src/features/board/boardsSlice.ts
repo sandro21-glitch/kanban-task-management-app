@@ -3,104 +3,10 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import { ActiveStatus } from "../modals/addTask/AddNewTask";
 import { v4 as uuidv4 } from "uuid";
-export interface BoardState {
-  boards: {
-    id: number;
-    name: string;
-    isActive: boolean;
-    boardTodos: {
-      todoId: string;
-      todoName: string;
-      todoTasks: {
-        taskName: string;
-        taskDesc: string;
-        subtasks: {
-          subtaskId: string;
-          subtaskName: string;
-          isCompleted: boolean;
-        }[];
-      }[];
-    }[];
-  }[];
-}
-interface TaskType {
-  taskName: string;
-  taskDesc: string;
-  subtasks: {
-    subtaskId: string;
-    subtaskName: string;
-    isCompleted: boolean;
-  }[];
-}
+import { BoardState, TaskType } from "../../types/BoardTypes";
+
 const initialState: BoardState = {
-  boards: [
-    // {
-    //   id: 1,
-    //   name: "TEST BOARD 1",
-    //   isActive: true,
-    //   boardTodos: [
-    //     {
-    //       todoName: "Done",
-    //       todoTasks: [
-    //         {
-    //           taskName: "Task 1",
-    //           taskDesc: "Description 1",
-    //           subtasks: [
-    //             { subtaskName: "Subtask 1", isCompleted: false },
-    //             { subtaskName: "Subtask 2", isCompleted: true },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       todoName: "Later",
-    //       todoTasks: [
-    //         {
-    //           taskName: "Task 1",
-    //           taskDesc: "Description 1",
-    //           subtasks: [
-    //             { subtaskName: "Subtask 1", isCompleted: false },
-    //             { subtaskName: "Subtask 2", isCompleted: true },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // {
-    //   id: 2,
-    //   name: "TEST BOARD 2",
-    //   isActive: false,
-    //   boardTodos: [
-    //     {
-    //       todoName: "Done",
-    //       todoTasks: [
-    //         {
-    //           taskName: "Task 1",
-    //           taskDesc: "Description 1",
-    //           subtasks: [
-    //             { subtaskName: "Subtask 1", isCompleted: false },
-    //             { subtaskName: "Subtask 2", isCompleted: false },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       todoName: "Later2",
-    //       todoTasks: [
-    //         {
-    //           taskName: "Task 1",
-    //           taskDesc: "Description 1",
-    //           subtasks: [
-    //             { subtaskName: "Subtask 1", isCompleted: false },
-    //             { subtaskName: "Subtask 2", isCompleted: false },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-  ],
+  boards: [],
 };
 
 export const boardSlice = createSlice({
