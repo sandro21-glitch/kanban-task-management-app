@@ -11,6 +11,7 @@ type TaskOptionTypes = {
   todoId: string;
   localOpenTaskOptions: boolean;
   setLocalOpenTaskOptions: (open: boolean) => void;
+  taskId: string;
 };
 
 const TaskOptions = ({
@@ -20,6 +21,7 @@ const TaskOptions = ({
   todoId,
   localOpenTaskOptions,
   setLocalOpenTaskOptions,
+  taskId,
 }: TaskOptionTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   const completedSubs = subtasks.filter((task) => task.isCompleted).length;
@@ -58,7 +60,6 @@ const TaskOptions = ({
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [localOpenTaskOptions, handleOutsideClick]);
-
   return (
     <div className="w-screen h-screen fixed inset-0 z-[99999] flex justify-center">
       <div className="bg-black opacity-40 absolute inset-0 z-[-1]"></div>
@@ -80,7 +81,7 @@ const TaskOptions = ({
             Subtasks ({completedSubs} of {subtasks.length})
           </p>
           <SubtasksList subtasks={subtasks} todoId={todoId} />
-          <SubtasksCurrStatus todoId={todoId} />
+          <SubtasksCurrStatus todoId={todoId} taskId={taskId} />
         </div>
       </section>
     </div>
