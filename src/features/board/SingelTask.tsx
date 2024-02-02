@@ -8,8 +8,9 @@ type SingleTaskTypes = {
   completedLength: number;
   subtasksLength: number;
   taskDesc?: string;
-  subtasks: { subtaskName: string; isCompleted: boolean }[];
+  subtasks: { subtaskName: string; subtaskId: string; isCompleted: boolean }[];
   todoId: string;
+  taskId: string;
 };
 
 const SingelTask = ({
@@ -19,11 +20,11 @@ const SingelTask = ({
   taskDesc,
   subtasks,
   todoId,
+  taskId,
 }: SingleTaskTypes) => {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   const [localOpenTaskOptions, setLocalOpenTaskOptions] = useState(false);
-
   return (
     <div
       onClick={() => {
@@ -53,6 +54,7 @@ const SingelTask = ({
           taskName={taskName}
           subtasks={subtasks}
           taskDesc={taskDesc}
+          taskId={taskId}
         />
       )}
     </div>
