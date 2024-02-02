@@ -1,23 +1,35 @@
-import { BoardTodos } from "../../../types/BoardTypes";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { assignTodoTaskToColumn } from "../../board/boardsSlice";
 
 type SingleTodoTypes = {
   todoId: string;
   todoName: string;
-  boardTodos: BoardTodos[];
-  setActiveTodo: (name: string) => void;
+  taskId: string;
+  setActiveTodo: React.Dispatch<
+    React.SetStateAction<{ id: string; name: string }>
+  >;
 };
 
 const SingleTodoList = ({
   todoId,
   todoName,
-  boardTodos,
   setActiveTodo,
+  taskId,
 }: SingleTodoTypes) => {
-  console.log(boardTodos);
+  const dispatch = useAppDispatch();
+  const handleAssingNewCol = () => {
+    setActiveTodo((prev) => ({
+      ...prev,
+      name: todoName,
+      id: todoId,
+    }));
+    dispatch(assignTodoTaskToColumn({ todoId, taskId }));
+  };
+
   return (
     <li
       key={todoId}
-      onClick={() => setActiveTodo(todoName)}
+      onClick={() => handleAssingNewCol()}
       className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
     >
       {todoName}
