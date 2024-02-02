@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { selectActiveBoard } from "../../board/boardsSlice";
 import SingleTodoList from "./SingleTodoList";
 
 type SubtasksStatusTypes = {
   todoId: string;
+  taskId: string;
 };
-
-const SubtasksCurrStatus = ({ todoId }: SubtasksStatusTypes) => {
+type TodoType = {
+  name: string;
+  id: string;
+};
+const SubtasksCurrStatus = ({ todoId, taskId }: SubtasksStatusTypes) => {
   const activeBoard = useAppSelector(selectActiveBoard);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeTodo, setActiveTodo] = useState<string>("");
+  const [activeTodo, setActiveTodo] = useState<TodoType>({ name: "", id: "" });
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -18,6 +22,12 @@ const SubtasksCurrStatus = ({ todoId }: SubtasksStatusTypes) => {
     const todo = boardTodos.find((todo) => todo.todoId === id);
     return todo?.todoName;
   };
+  useEffect(() => {
+    setActiveTodo((prev) => ({
+      ...prev,
+      id: todoId,
+    }));
+  }, [todoId]);
   if (!activeBoard) return null;
   const { boardTodos } = activeBoard;
   return (
@@ -33,7 +43,7 @@ const SubtasksCurrStatus = ({ todoId }: SubtasksStatusTypes) => {
         aria-haspopup="true"
         onClick={toggleMenu}
       >
-        {activeTodo ? activeTodo : getTodoNameById(todoId)}
+        {activeTodo.name ? activeTodo.name : getTodoNameById(todoId)}
         {menuOpen && (
           <ul
             className="absolute right-0 z-10 mt-4 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
@@ -46,7 +56,7 @@ const SubtasksCurrStatus = ({ todoId }: SubtasksStatusTypes) => {
                   key={todoId}
                   todoId={todoId}
                   todoName={todoName}
-                  boardTodos={boardTodos}
+                  taskId={taskId}
                   setActiveTodo={setActiveTodo}
                 />
               );
