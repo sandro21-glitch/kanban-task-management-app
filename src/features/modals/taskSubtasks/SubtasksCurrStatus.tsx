@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { selectActiveBoard } from "../../board/boardsSlice";
+import SingleTodoList from "./SingleTodoList";
 
 type SubtasksStatusTypes = {
   todoId: string;
@@ -36,21 +37,18 @@ const SubtasksCurrStatus = ({ todoId }: SubtasksStatusTypes) => {
         {menuOpen && (
           <ul
             className="absolute right-0 z-10 mt-4 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
             tabIndex={-1}
           >
             {boardTodos.map((todo) => {
               const { todoId, todoName } = todo;
               return (
-                <li
+                <SingleTodoList
                   key={todoId}
-                  onClick={() => setActiveTodo(todoName)}
-                  className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
-                >
-                  {todoName}
-                </li>
+                  todoId={todoId}
+                  todoName={todoName}
+                  boardTodos={boardTodos}
+                  setActiveTodo={setActiveTodo}
+                />
               );
             })}
           </ul>
