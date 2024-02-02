@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { checkCompletedSubtask } from "../../board/boardsSlice";
 
 type SubtaskTypes = {
@@ -15,7 +15,7 @@ const SingleSubtask = ({
   isCompleted,
 }: SubtaskTypes) => {
   const dispatch = useAppDispatch();
-
+  const darkMode = useAppSelector((store) => store.theme.darkMode);
   const handleChangeCheckbox = () => {
     dispatch(
       checkCompletedSubtask({ checked: !isCompleted, subtaskId, todoId })
@@ -37,7 +37,13 @@ const SingleSubtask = ({
       />
       <div
         className={`${
-          isCompleted ? "line-through" : "text-black"
+          isCompleted
+            ? darkMode
+              ? "line-through text-gray-400"
+              : "line-through text-gray-400"
+            : !darkMode
+            ? "text-black"
+            : ""
         } text-[.75rem] font-semibold`}
       >
         {subtaskName}
