@@ -182,8 +182,6 @@ export const boardSlice = createSlice({
         }
       }
     },
-    
-    
   },
 });
 
