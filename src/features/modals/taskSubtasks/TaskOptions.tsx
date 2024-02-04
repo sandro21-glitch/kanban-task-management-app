@@ -28,10 +28,10 @@ const TaskOptions = ({
       } p-7 rounded-lg cursor-default`}
     >
       <OptionsHeader taskName={taskName} />
-      <p className="text-[.8rem] mb-5 cursor-text">
+      <p className={`${darkMode ? 'text-white' : 'text-black' } text-[.8rem] mb-5 cursor-text`}>
         {taskDesc ? taskDesc : ""}
       </p>
-      <p className="text-[.75rem] font-bold mb-2">
+      <p className={`${darkMode ? 'text-white' : 'text-black'} text-[.75rem] font-bold mb-2`}>
         Subtasks ({completedSubs} of {subtasks.length})
       </p>
       <SubtasksList subtasks={subtasks} todoId={todoId} />
