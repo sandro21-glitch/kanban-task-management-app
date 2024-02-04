@@ -14,6 +14,7 @@ type TodoType = {
 };
 const SubtasksCurrStatus = ({ todoId, taskId }: SubtasksStatusTypes) => {
   const activeBoard = useAppSelector(selectActiveBoard);
+  const darkMode = useAppSelector((store) => store.theme.darkMode);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTodo, setActiveTodo] = useState<TodoType>({ name: "", id: "" });
   const disaptch = useAppDispatch();
@@ -34,7 +35,13 @@ const SubtasksCurrStatus = ({ todoId, taskId }: SubtasksStatusTypes) => {
   const { boardTodos } = activeBoard;
   return (
     <div>
-      <p className="mb-2 text-[.8rem] font-bold">Current Status</p>
+      <p
+        className={`${
+          darkMode ? "text-white" : "text-black"
+        } mb-2 text-[.8rem] font-bold`}
+      >
+        Current Status
+      </p>
 
       <button
         type="button"
@@ -42,12 +49,14 @@ const SubtasksCurrStatus = ({ todoId, taskId }: SubtasksStatusTypes) => {
           hover:border-mediumPurple rounded-md bg-transparent transition-all ease-in duration-150 py-2 px-3 text-sm"
         onClick={toggleMenu}
       >
-        <span>
+        <span className={`${darkMode ? "text-white" : "text-black"} font-bold`}>
           {activeTodo.name ? activeTodo.name : getTodoNameById(todoId)}
         </span>
         {menuOpen && (
           <ul
-            onClick={() => disaptch(setOpenTaskOptions({isOpen:false,task:null}))}
+            onClick={() =>
+              disaptch(setOpenTaskOptions({ isOpen: false, task: null }))
+            }
             className="absolute right-0 z-10 mt-4 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           >
             {boardTodos.map((todo) => {
