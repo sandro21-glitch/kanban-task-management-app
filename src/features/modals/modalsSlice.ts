@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { SingleTaskTypes } from "../../types/BoardTypes";
 
 export interface CounterState {
   addBoardModal: boolean;
@@ -7,7 +8,7 @@ export interface CounterState {
   openEditPopup: boolean;
   openClearPopup: boolean;
   newTaskModal: boolean;
-  openTaskOptions: boolean;
+  openTaskOptions: { isOpen: boolean; task: SingleTaskTypes | null };
 }
 
 const initialState: CounterState = {
@@ -16,7 +17,10 @@ const initialState: CounterState = {
   openEditPopup: false,
   openClearPopup: false,
   newTaskModal: false,
-  openTaskOptions: false,
+  openTaskOptions: {
+    isOpen: false,
+    task: null,
+  },
 };
 
 export const modalsSlice = createSlice({
@@ -38,8 +42,18 @@ export const modalsSlice = createSlice({
     setNewTaskModal: (state, action: PayloadAction<boolean>) => {
       state.newTaskModal = action.payload;
     },
-    setOpenTaskOptions: (state, action: PayloadAction<boolean>) => {
-      state.openTaskOptions = action.payload;
+    setOpenTaskOptions: (
+      state,
+      action: PayloadAction<{ isOpen: boolean; task: SingleTaskTypes | null }>
+    ) => {
+      const { isOpen, task } = action.payload;
+      return {
+        ...state,
+        openTaskOptions: {
+          isOpen,
+          task,
+        },
+      };
     },
   },
 });
