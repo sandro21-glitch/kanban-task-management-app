@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setOpenTaskOptions } from "../modals/modalsSlice";
-import TaskOptions from "../modals/taskSubtasks/TaskOptions";
 
 type SingleTaskTypes = {
   taskName: string;
@@ -24,39 +22,36 @@ const SingelTask = ({
 }: SingleTaskTypes) => {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
-  const [localOpenTaskOptions, setLocalOpenTaskOptions] = useState(false);
+  const task = {
+    taskDesc,
+    taskName,
+    taskId,
+    todoId,
+    subtasks,
+  };
+  const handleOpenTaskOptions = () => {
+    dispatch(setOpenTaskOptions({ isOpen: true, task }));
+  };
   return (
-    <div
-      onClick={() => {
-        dispatch(setOpenTaskOptions(true));
-        setLocalOpenTaskOptions(true);
-      }}
-      className={`w-[280px] ${
-        darkMode ? "bg-darkMode" : "bg-white"
-      } mt-5 py-6 px-4 rounded-lg shadow-xl cursor-pointer group `}
-    >
-      <p
-        className={`group-hover:text-mediumPurple
+    <div>
+      <div
+        onClick={handleOpenTaskOptions}
+        className={`w-[280px] ${
+          darkMode ? "bg-darkMode" : "bg-white"
+        } mt-5 py-6 px-4 rounded-lg shadow-xl cursor-pointer group `}
+      >
+        <p
+          className={`group-hover:text-mediumPurple
      ${
        darkMode ? "text-white" : "text-black"
      } text-[.9rem] font-semibold transition-colors ease-in duration-150`}
-      >
-        {taskName}
-      </p>
-      <p>
-        {completedLength} of {subtasksLength}
-      </p>
-      {localOpenTaskOptions && (
-        <TaskOptions
-          localOpenTaskOptions={localOpenTaskOptions}
-          setLocalOpenTaskOptions={setLocalOpenTaskOptions}
-          todoId={todoId}
-          taskName={taskName}
-          subtasks={subtasks}
-          taskDesc={taskDesc}
-          taskId={taskId}
-        />
-      )}
+        >
+          {taskName}
+        </p>
+        <p>
+          {completedLength} of {subtasksLength}
+        </p>
+      </div>
     </div>
   );
 };
