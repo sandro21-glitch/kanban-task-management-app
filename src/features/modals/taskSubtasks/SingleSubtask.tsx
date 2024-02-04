@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { checkCompletedSubtask } from "../../board/boardsSlice";
 
@@ -16,9 +17,13 @@ const SingleSubtask = ({
 }: SubtaskTypes) => {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+
+  const [localIsCompleted, setLocalIsCompleted] = useState(isCompleted);
+
   const handleChangeCheckbox = () => {
+    setLocalIsCompleted(!localIsCompleted);
     dispatch(
-      checkCompletedSubtask({ checked: !isCompleted, subtaskId, todoId })
+      checkCompletedSubtask({ checked: !localIsCompleted, subtaskId, todoId })
     );
   };
 
@@ -26,18 +31,18 @@ const SingleSubtask = ({
     <label
       htmlFor={subtaskId}
       className={`flex items-center gap-2 ${
-        isCompleted ? "bg-[#f4f7fd]" : "bg-lightPurple"
+        localIsCompleted ? "bg-[#f4f7fd]" : "bg-lightPurple"
       } p-3 rounded-lg`}
     >
       <input
         id={subtaskId}
         type="checkbox"
-        checked={isCompleted}
+        checked={localIsCompleted}
         onChange={handleChangeCheckbox}
       />
       <div
         className={`${
-          isCompleted
+          localIsCompleted
             ? darkMode
               ? "line-through text-gray-400"
               : "line-through text-gray-400"
