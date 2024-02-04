@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { selectActiveBoard } from "../../board/boardsSlice";
 import SingleTodoList from "./SingleTodoList";
+import { setOpenTaskOptions } from "../modalsSlice";
 
 type SubtasksStatusTypes = {
   todoId: string;
@@ -15,6 +16,7 @@ const SubtasksCurrStatus = ({ todoId, taskId }: SubtasksStatusTypes) => {
   const activeBoard = useAppSelector(selectActiveBoard);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTodo, setActiveTodo] = useState<TodoType>({ name: "", id: "" });
+  const disaptch = useAppDispatch();
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -38,16 +40,15 @@ const SubtasksCurrStatus = ({ todoId, taskId }: SubtasksStatusTypes) => {
         type="button"
         className="relative inline-block text-left w-full border border-gray-400 cursor-pointer
           hover:border-mediumPurple rounded-md bg-transparent transition-all ease-in duration-150 py-2 px-3 text-sm"
-        id="menu-button"
-        aria-expanded={menuOpen}
-        aria-haspopup="true"
         onClick={toggleMenu}
       >
-        {activeTodo.name ? activeTodo.name : getTodoNameById(todoId)}
+        <span>
+          {activeTodo.name ? activeTodo.name : getTodoNameById(todoId)}
+        </span>
         {menuOpen && (
           <ul
+            onClick={() => disaptch(setOpenTaskOptions({isOpen:false,task:null}))}
             className="absolute right-0 z-10 mt-4 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-            tabIndex={-1}
           >
             {boardTodos.map((todo) => {
               const { todoId, todoName } = todo;
