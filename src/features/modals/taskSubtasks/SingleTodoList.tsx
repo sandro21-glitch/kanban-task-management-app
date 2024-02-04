@@ -1,5 +1,6 @@
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { assignTodoTaskToColumn } from "../../board/boardsSlice";
+import { setOpenTaskOptions } from "../modalsSlice";
 
 type SingleTodoTypes = {
   todoId: string;
@@ -24,12 +25,13 @@ const SingleTodoList = ({
       id: todoId,
     }));
     dispatch(assignTodoTaskToColumn({ todoId, taskId }));
+    dispatch(setOpenTaskOptions({ isOpen: false, task: null }));
   };
 
   return (
     <li
       key={todoId}
-      onClick={() => handleAssingNewCol()}
+      onClick={handleAssingNewCol}
       className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
     >
       {todoName}
