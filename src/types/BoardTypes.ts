@@ -45,3 +45,15 @@ export interface TaskType {
     isCompleted: boolean;
   }[];
 }
+export interface SubtaskType {
+  subtaskId: string;
+  subtaskName: string;
+  isCompleted: boolean;
+}
+export interface SingleTaskTypes {
+  taskName: string;
+  taskDesc?: string;
+  taskId: string;
+  subtasks: SubtaskType[];
+  todoId: string;
+}
