@@ -48,7 +48,7 @@ const SingleSubtask = ({
               : "line-through text-gray-400"
             : !darkMode
             ? "text-black"
-            : ""
+            : "text-white"
         } text-[.75rem] font-semibold`}
       >
         {subtaskName}
