@@ -16,7 +16,7 @@ type TaskDetailsTypes = {
 const TaskDetails = ({ todoTasks, todoId }: TaskDetailsTypes) => {
   if (todoTasks.length === 0) return null;
   return (
-    <div>
+    <>
       {todoTasks.map((task, index) => {
         const { taskName, subtasks, taskDesc, taskId } = task;
         // Filter completed subtasks
@@ -36,7 +36,7 @@ const TaskDetails = ({ todoTasks, todoId }: TaskDetailsTypes) => {
           />
         );
       })}
-    </div>
+    </>
   );
 };
 
