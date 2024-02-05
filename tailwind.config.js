@@ -17,6 +17,9 @@ export default {
         sidebarHover: "#625fc71e",
         borderColor: "rgba(130,143,163,.25)",
       },
+      boxShadow: {
+        modal: "0px 10px 20px rgba(54, 78, 126, 0.25)",
+      },
       minWidth: {
         sidebarWidth: "300px",
       },
