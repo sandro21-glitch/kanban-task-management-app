@@ -165,21 +165,40 @@ export const boardSlice = createSlice({
       const { boards } = state;
       const activeBoard = boards.find((board) => board.isActive);
       const { taskId, todoId } = action.payload;
-    
+
       if (activeBoard) {
         // Find the original todo column and map the tasks
         const originalTodoCol = activeBoard.boardTodos.map((todo) => {
-          const todoTasks = todo.todoTasks.filter((task) => task.taskId === taskId);
+          const todoTasks = todo.todoTasks.filter(
+            (task) => task.taskId === taskId
+          );
           if (todoTasks.length > 0) {
-            todo.todoTasks = todo.todoTasks.filter((task) => task.taskId !== taskId);
+            todo.todoTasks = todo.todoTasks.filter(
+              (task) => task.taskId !== taskId
+            );
           }
           return todoTasks;
         });
         // Find the new todo column
-        const newTodo = activeBoard.boardTodos.find((todo) => todo.todoId === todoId);
+        const newTodo = activeBoard.boardTodos.find(
+          (todo) => todo.todoId === todoId
+        );
         if (newTodo) {
           originalTodoCol.map((tasks) => newTodo.todoTasks.push(...tasks));
         }
+      }
+    },
+    deleteTask: (state, action: PayloadAction<string>) => {
+      const { boards } = state;
+      const activeBoard = boards.find((board) => board.isActive);
+      if (activeBoard) {
+        const updateTodo = activeBoard.boardTodos.map((todo) => {
+          const DeleteTask = todo.todoTasks.filter(
+            (task) => task.taskId !== action.payload
+          );
+          return { ...todo, todoTasks: DeleteTask };
+        });
+        activeBoard.boardTodos = updateTodo;
       }
     },
   },
@@ -195,6 +214,7 @@ export const {
   addNewTask,
   checkCompletedSubtask,
   assignTodoTaskToColumn,
+  deleteTask,
 } = boardSlice.actions;
 
 // selects only the active boards from the Redux state.
