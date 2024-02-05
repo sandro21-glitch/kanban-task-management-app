@@ -68,6 +68,7 @@ const SubtasksCurrStatus = ({ todoId, taskId }: SubtasksStatusTypes) => {
                   todoName={todoName}
                   taskId={taskId}
                   setActiveTodo={setActiveTodo}
+                  activeTodoId={activeTodo?.id}
                 />
               );
             })}

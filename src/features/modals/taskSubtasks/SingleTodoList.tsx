@@ -9,6 +9,7 @@ type SingleTodoTypes = {
   setActiveTodo: React.Dispatch<
     React.SetStateAction<{ id: string; name: string }>
   >;
+  activeTodoId: string;
 };
 
 const SingleTodoList = ({
@@ -16,6 +17,7 @@ const SingleTodoList = ({
   todoName,
   setActiveTodo,
   taskId,
+  activeTodoId,
 }: SingleTodoTypes) => {
   const dispatch = useAppDispatch();
   const handleAssingNewCol = () => {
@@ -32,7 +34,9 @@ const SingleTodoList = ({
     <li
       key={todoId}
       onClick={handleAssingNewCol}
-      className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
+      className={`${
+        todoId === activeTodoId ? "text-mediumPurple" : "text-gray-500"
+      } font-bold block px-4 py-2 text-sm cursor-pointer`}
     >
       {todoName}
     </li>
