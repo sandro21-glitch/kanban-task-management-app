@@ -1,4 +1,5 @@
 import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { deleteBoard } from "../../board/boardsSlice";
 import { setEditBoardModal, setOpenClearPopup } from "../modalsSlice";
 
 const EditBoardPopup = () => {
@@ -20,7 +21,7 @@ const EditBoardPopup = () => {
       >
         Clear Board
       </li>
-      <li className="text-[.8rem] font-medium text-red-500">Delete Board</li>
+      <li onClick={() => dispatch(deleteBoard())} className="text-[.8rem] font-medium text-red-500">Delete Board</li>
       <li className="text-[.8rem] font-medium text-red-500">Reset Boards</li>
     </ul>
   );
