@@ -201,6 +201,17 @@ export const boardSlice = createSlice({
         activeBoard.boardTodos = updateTodo;
       }
     },
+    deleteBoard: (state) => {
+      const updatedBoards = state.boards.filter(
+        (board) => board.isActive !== true
+      );
+      if (updatedBoards.length > 0) {
+        updatedBoards[0].isActive = true;
+        state.boards = updatedBoards;
+      } else {
+        state.boards = [];
+      }
+    },
   },
 });
 
@@ -215,6 +226,7 @@ export const {
   checkCompletedSubtask,
   assignTodoTaskToColumn,
   deleteTask,
+  deleteBoard,
 } = boardSlice.actions;
 
 // selects only the active boards from the Redux state.
