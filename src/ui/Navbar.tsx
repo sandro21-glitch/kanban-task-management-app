@@ -5,6 +5,7 @@ import logo from "/assets/logo.svg";
 
 const Navbar = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+  const { isSidebarOpen } = useAppSelector((store) => store.popup);
   const boards = useAppSelector((store) => store.board.boards);
   const activeBoardName = boards
     .filter((board) => board.isActive)
@@ -19,7 +20,7 @@ const Navbar = () => {
       <div
         className={`flex items-center border-r gap-4 min-w-[300px] ${
           darkMode ? "border-r-mediumDark" : null
-        } h-full`}
+        } ${!isSidebarOpen ? 'border-b' : 'border-b-0'} h-full`}
       >
         <img src={logo} alt="logo" className="ml-5" />
         <h1
