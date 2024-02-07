@@ -13,7 +13,7 @@ const EditBoardName = ({
 }: BoardNameTypes) => {
   useEffect(() => {
     setEditedBoardName(name);
-  }, [name]);
+  }, [name,setEditedBoardName]);
   return (
     <div className="flex flex-col mb-5">
       <ModalLabel forId="boardName" name={name} />
