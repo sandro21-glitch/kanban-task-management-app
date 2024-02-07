@@ -7,7 +7,7 @@ const AddNewColBtn = ({ setBoardCols, boardCols }: NewColTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
 
   const handleAddCols = () => {
-    const prevCols = [...boardCols, ""];
+    const prevCols = [...boardCols, "Doing"];
     setBoardCols(prevCols);
   };
 
