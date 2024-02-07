@@ -18,6 +18,7 @@ const EditBoard = () => {
   const activeBoard = useAppSelector(selectActiveBoard);
   const [editedBoardName, setEditedBoardName] = useState<string>("");
   const [editBoardCols, setEditBoardCols] = useState<string[]>([""]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   if (!activeBoard) return null;
   const { name, boardTodos } = activeBoard;
 
@@ -32,10 +33,10 @@ const EditBoard = () => {
     }
   };
   const handleEditBoard = () => {
+    setFormSubmitted(true);
     // check if there is any empty column in editBoardCols
     const hasEmptyColumn = editBoardCols.some((col) => col === "");
-    if (hasEmptyColumn) {
-      alert("Please fill in all todo names before saving.");
+    if (hasEmptyColumn || !editedBoardName) {
       return;
     }
     editBoard();
@@ -58,6 +59,7 @@ const EditBoard = () => {
         name={name}
         editedBoardName={editedBoardName}
         setEditedBoardName={setEditedBoardName}
+        submitted={formSubmitted}
       />
       <label className="text-lightGray font-semibold text-[.8rem] mb-1">
         Board Columns
@@ -66,6 +68,7 @@ const EditBoard = () => {
         editBoardCols={editBoardCols}
         setEditBoardCols={setEditBoardCols}
         boardTodos={boardTodos}
+        submitted={formSubmitted}
       />
       <AddNewColumnBtn
         editBoardCols={editBoardCols}
