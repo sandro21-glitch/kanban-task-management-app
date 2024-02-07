@@ -1,11 +1,13 @@
 import ModalLabel from "../../../ui/ModalLabel";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import crossIcon from "/assets/icon-cross.svg";
+import InputError from "../../../ui/InputError";
 type SubtaskTypes = {
   subtasks: string[];
   setSubtasks: (task: string[]) => void;
+  submitted: boolean;
 };
-const Subtasks = ({ subtasks, setSubtasks }: SubtaskTypes) => {
+const Subtasks = ({ subtasks, setSubtasks, submitted }: SubtaskTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
 
   const handleAddSubtask = () => {
@@ -29,16 +31,23 @@ const Subtasks = ({ subtasks, setSubtasks }: SubtaskTypes) => {
       <ModalLabel forId="subtasks" name="Subtasks" />
       <ul className="flex flex-col gap-3 mb-3">
         {subtasks.map((subtask, index) => (
-          <li key={index} className="flex items-center">
+          <li key={index} className="flex items-center relative">
             <input
               type="text"
               placeholder="e.g Make Coffee"
               value={subtask}
               onChange={(e) => handleSubtaskChange(index, e.target.value)}
-              className={`w-full outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
+              className={`w-full outline-none border ${
+                subtask === "" && submitted
+                  ? "border-red-500"
+                  : "border-borderColor"
+              }  p-2 text-[.9rem] rounded-md ${
                 darkMode ? "bg-darkMode text-white" : "bg-white text-black"
               }`}
             />
+            {subtask === "" && submitted && (
+              <InputError text="Subtask cannot be empty" />
+            )}
             <button
               onClick={() => handleRemoveSubtask(index)}
               type="button"
