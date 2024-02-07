@@ -12,11 +12,12 @@ const AddNewBoard = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   const [boardName, setBoardName] = useState<string>("");
   const [boardCols, setBoardCols] = useState<string[]>(["Todo", "Doing"]);
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const handleAddNewBoard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!boardName) {
-      alert("Add board name");
+    setFormSubmitted(true);
+    const hasAnyEmptyCol = boardCols.some((col) => col === "");
+    if (!boardName || hasAnyEmptyCol) {
       return;
     }
     dispatch(addNewBoard({ boardName, boardCols }));
@@ -37,9 +38,17 @@ const AddNewBoard = () => {
         >
           Add new board
         </h3>
-        <BoardName setBoardName={setBoardName} boardName={boardName} />
+        <BoardName
+          setBoardName={setBoardName}
+          boardName={boardName}
+          submitted={formSubmitted}
+        />
         {/* board cols */}
-        <ColumnList boardCols={boardCols} setBoardCols={setBoardCols} />
+        <ColumnList
+          submitted={formSubmitted}
+          boardCols={boardCols}
+          setBoardCols={setBoardCols}
+        />
         <AddNewColBtn boardCols={boardCols} setBoardCols={setBoardCols} />
         <CreateNewBoardBtn />
       </div>
