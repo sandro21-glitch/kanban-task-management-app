@@ -18,6 +18,7 @@ const AddNewTask = () => {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [subtasks, setSubtasks] = useState<string[]>([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeStatus, setActiveStatus] = useState<ActiveStatus>({
     statusName: "",
     index: null,
@@ -35,6 +36,7 @@ const AddNewTask = () => {
   };
 
   const handleAddSubtask = () => {
+    setFormSubmitted(true);
     if (
       taskName !== "" &&
       subtasks.length >= 1 &&
@@ -59,13 +61,22 @@ const AddNewTask = () => {
         Add New Task
       </h3>
       <div className="flex flex-col gap-5">
-        <TaskName taskName={taskName} setTaskName={setTaskName} />
+        <TaskName
+          submitted={formSubmitted}
+          taskName={taskName}
+          setTaskName={setTaskName}
+        />
         <TaskDescription
           taskDescription={taskDescription}
           setTaskDescription={setTaskDescription}
         />
-        <Subtasks subtasks={subtasks} setSubtasks={setSubtasks} />
+        <Subtasks
+          subtasks={subtasks}
+          setSubtasks={setSubtasks}
+          submitted={formSubmitted}
+        />
         <SelectCol
+          submitted={formSubmitted}
           activeStatus={activeStatus}
           setActiveStatus={setActiveStatus}
         />
