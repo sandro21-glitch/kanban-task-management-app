@@ -5,15 +5,17 @@ type BoardNameTypes = {
   editedBoardName: string;
   setEditedBoardName: (name: string) => void;
   name: string;
+  submitted: boolean;
 };
 const EditBoardName = ({
   editedBoardName,
   setEditedBoardName,
   name,
+  submitted
 }: BoardNameTypes) => {
   useEffect(() => {
     setEditedBoardName(name);
-  }, [name,setEditedBoardName]);
+  }, [name, setEditedBoardName]);
   return (
     <div className="flex flex-col mb-5">
       <ModalLabel forId="boardName" name={name} />
@@ -22,6 +24,7 @@ const EditBoardName = ({
         value={editedBoardName}
         onChange={setEditedBoardName}
         placeholder="e.g Web Development"
+        isSubmited={submitted}
       />
     </div>
   );
