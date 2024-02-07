@@ -5,8 +5,9 @@ import { ActiveStatus } from "./AddNewTask";
 type ColTypes = {
   activeStatus: ActiveStatus;
   setActiveStatus: React.Dispatch<React.SetStateAction<ActiveStatus>>;
+  submitted: boolean;
 };
-const SelectCol = ({ activeStatus, setActiveStatus }: ColTypes) => {
+const SelectCol = ({ activeStatus, setActiveStatus, submitted }: ColTypes) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const activeBoard = useAppSelector(selectActiveBoard);
@@ -28,10 +29,14 @@ const SelectCol = ({ activeStatus, setActiveStatus }: ColTypes) => {
         <button
           type="button"
           onClick={handleToggleMenu}
-          className="inline-flex w-full justify-start gap-x-1.5 rounded-md
-           bg-white px-3 py-3 text-sm font-semibold
-            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50
-            hover:border-mediumPurple border border-transparent transition-all ease-in duration-150"
+          className={`inline-flex w-full justify-start gap-x-1.5 rounded-md
+          bg-white px-3 py-3 text-sm font-semibold
+           text-gray-900 shadow-sm  hover:bg-gray-50
+           hover:border-mediumPurple border  ${
+             submitted && !activeStatus.statusName
+               ? "border-red-500"
+               : "border-gray-400"
+           } transition-all ease-in duration-150`}
           id="menu-button"
           aria-expanded={isMenuOpen}
           aria-haspopup="true"
