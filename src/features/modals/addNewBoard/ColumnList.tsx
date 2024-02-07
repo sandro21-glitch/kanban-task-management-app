@@ -3,8 +3,13 @@ import crossIcon from "/assets/icon-cross.svg";
 type ColumnListTypes = {
   boardCols: string[];
   setBoardCols: (cols: string[]) => void;
+  submitted: boolean;
 };
-const ColumnList = ({ boardCols, setBoardCols }: ColumnListTypes) => {
+const ColumnList = ({
+  boardCols,
+  setBoardCols,
+  submitted,
+}: ColumnListTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
 
   const handleColumnChange = (index: number, value: string) => {
@@ -26,7 +31,7 @@ const ColumnList = ({ boardCols, setBoardCols }: ColumnListTypes) => {
       <ul className="flex flex-col gap-3">
         {boardCols.map((col, index) => {
           return (
-            <li key={index} className="flex items-center">
+            <li key={index} className="flex items-center relative">
               <input
                 type="text"
                 placeholder="e.g Todo"
@@ -34,8 +39,13 @@ const ColumnList = ({ boardCols, setBoardCols }: ColumnListTypes) => {
                 onChange={(e) => handleColumnChange(index, e.target.value)}
                 className={`w-full outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
                   darkMode ? "bg-darkMode text-white" : "bg-white text-black"
-                }`}
+                } ${!col && submitted ? "border-red-500" : ""}`}
               />
+              {!col && submitted && (
+                <span className="text-red-500 absolute right-12 top-3 text-[.75rem]">
+                  Can't be empty
+                </span>
+              )}
               <button
                 onClick={() => handleRemoveCols(index)}
                 type="button"
