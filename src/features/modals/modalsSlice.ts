@@ -10,6 +10,7 @@ export interface CounterState {
   newTaskModal: boolean;
   openTaskOptions: { isOpen: boolean; task: SingleTaskTypes | null };
   openDeletePopup: boolean;
+  editTaskModal: boolean;
 }
 
 const initialState: CounterState = {
@@ -23,6 +24,7 @@ const initialState: CounterState = {
     task: null,
   },
   openDeletePopup: false,
+  editTaskModal: true,
 };
 
 export const modalsSlice = createSlice({
@@ -60,6 +62,9 @@ export const modalsSlice = createSlice({
         },
       };
     },
+    openEditTaskModal: (state, action: PayloadAction<boolean>) => {
+      state.editTaskModal = action.payload;
+    },
   },
 });
 
@@ -71,6 +76,7 @@ export const {
   setNewTaskModal,
   setOpenTaskOptions,
   setOpenDeletePopup,
+  openEditTaskModal,
 } = modalsSlice.actions;
 
 export default modalsSlice.reducer;
