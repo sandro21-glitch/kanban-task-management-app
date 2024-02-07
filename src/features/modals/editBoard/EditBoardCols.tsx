@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import crossIcon from "/assets/icon-cross.svg";
+import InputError from "../../../ui/InputError";
 
 type BoardColsTypes = {
   boardTodos: {
@@ -16,12 +17,14 @@ type BoardColsTypes = {
   }[];
   editBoardCols: string[];
   setEditBoardCols: React.Dispatch<React.SetStateAction<string[]>>;
+  submitted: boolean;
 };
 
 const EditBoardCols = ({
   editBoardCols,
   setEditBoardCols,
   boardTodos,
+  submitted,
 }: BoardColsTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
 
@@ -50,17 +53,26 @@ const EditBoardCols = ({
     <ul className="flex flex-col gap-3 mb-3">
       {editBoardCols.map((col, index) => {
         return (
-          <li key={index} className="flex items-center">
+          <li key={index} className="flex items-center relative">
             <input
               type="text"
               placeholder="e.g Todo"
               value={col}
               onChange={(e) => handleEditBoardCols(index, e.target.value)}
-              className={`w-full outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
+              className={`w-full outline-none border  p-2 text-[.9rem] rounded-md ${
                 darkMode ? "bg-darkMode text-white" : "bg-white text-black"
+              } ${
+                submitted && col === ""
+                  ? "border-red-500"
+                  : "border-borderColor"
               }`}
             />
-            <button onClick={() => handleRemoveCol(index)} type="button" className="ml-5">
+            {!col && submitted && <InputError text="Enter Valid name" />}
+            <button
+              onClick={() => handleRemoveCol(index)}
+              type="button"
+              className="ml-5"
+            >
               <img src={crossIcon} alt="remove icon" />
             </button>
           </li>
