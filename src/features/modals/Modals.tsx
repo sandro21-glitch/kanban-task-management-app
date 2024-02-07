@@ -16,6 +16,7 @@ import ClearBoard from "./clearBoard/ClearBoard";
 import AddNewTask from "./addTask/AddNewTask";
 import TaskOptions from "./taskSubtasks/TaskOptions";
 import DeleteBoard from "./deleteBoard/DeleteBoard";
+import EditTask from "./editTask/EditTask";
 
 const Modals = () => {
   const {
@@ -25,6 +26,7 @@ const Modals = () => {
     newTaskModal,
     openTaskOptions,
     openDeletePopup,
+    editTaskModal,
   } = useAppSelector((store) => store.modals);
 
   const isAnyModalOpen =
@@ -33,6 +35,7 @@ const Modals = () => {
     openClearPopup ||
     newTaskModal ||
     openDeletePopup ||
+    editTaskModal ||
     openTaskOptions.isOpen;
 
   const modalRef = useRef(null);
@@ -79,6 +82,7 @@ const Modals = () => {
             taskDesc={task.taskDesc}
           />
         )}
+        {editTaskModal && <EditTask />}
       </section>
     </div>
   );
