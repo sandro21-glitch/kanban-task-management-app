@@ -2,6 +2,7 @@
 import { v4 as uuidv4 } from "uuid";
 import ModalLabel from "../../../ui/ModalLabel";
 import { SubtaskType } from "../../../types/BoardTypes";
+import iconCross from "/assets/icon-cross.svg";
 
 type EditSubtaskTypes = {
   editedSubtasks: SubtaskType[];
@@ -59,7 +60,7 @@ const EditSubtasks = ({
                 type="button"
                 onClick={() => handleRemoveTask(subtaskId)}
               >
-                X
+                <img src={iconCross} alt="icon cross" />
               </button>
             </div>
           );
@@ -68,9 +69,10 @@ const EditSubtasks = ({
       <button
         type="button"
         onClick={() => handleAddNewTask()}
-        className="border"
+        className="bg-lightPurple text-mediumPurple rounded-full
+         py-2 font-bold hover:bg-transparent transition-all ease-in duration-150"
       >
-        Add New Task
+        + Add New Task
       </button>
     </div>
   );
