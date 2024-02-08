@@ -7,7 +7,7 @@ import EditStatus from "./EditStatus";
 import { editSubtaskDetails } from "../../board/boardsSlice";
 import { SingleTaskTypes, SubtaskType } from "../../../types/BoardTypes";
 import { openEditTaskModal } from "../modalsSlice";
-
+import SaveBtn from "./SaveBtn";
 type EditTaskTypes = {
   taskId: string;
   todoId: string;
@@ -81,7 +81,7 @@ const EditTask = ({ taskId, todoId }: EditTaskTypes) => {
           />
           <EditStatus />
         </article>
-        <button type="submit">Save Changes</button>
+        <SaveBtn />
       </div>
     </form>
   );
