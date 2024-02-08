@@ -30,7 +30,7 @@ const EditBoardCols = ({
 
   useEffect(() => {
     setEditBoardCols(boardTodos.map((todo) => todo.todoName));
-  }, [boardTodos]);
+  }, [boardTodos, setEditBoardCols]);
 
   const handleEditBoardCols = (index: number, name: string) => {
     setEditBoardCols((prevCols) => {
