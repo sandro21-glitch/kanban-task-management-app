@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import AddNewBoard from "./addNewBoard/AddNewBoard";
 import {
   openEditBoardPopModal,
+  openEditTaskModal,
   setAddBoardModal,
   setEditBoardModal,
   setNewTaskModal,
@@ -35,7 +36,7 @@ const Modals = () => {
     openClearPopup ||
     newTaskModal ||
     openDeletePopup ||
-    editTaskModal ||
+    editTaskModal.isOpen ||
     openTaskOptions.isOpen;
 
   const modalRef = useRef(null);
@@ -51,6 +52,7 @@ const Modals = () => {
     dispatch(setNewTaskModal(false));
     dispatch(setOpenDeletePopup(false));
     dispatch(setOpenTaskOptions({ isOpen: false, task: null }));
+    dispatch(openEditTaskModal({ isOpen: false, taskId: "", todoId: "" }));
   };
 
   // Attach the useOutsideClick hook to the modal container
@@ -61,6 +63,7 @@ const Modals = () => {
     return null;
   }
   const { task } = openTaskOptions;
+  const { taskId, todoId } = editTaskModal;
   return (
     <div className="w-screen h-screen absolute inset-0 z-[99999] flex justify-center">
       <div className=" bg-black opacity-75 absolute inset-0 z-[-1]"></div>
@@ -82,7 +85,7 @@ const Modals = () => {
             taskDesc={task.taskDesc}
           />
         )}
-        {editTaskModal && <EditTask />}
+        {editTaskModal.isOpen && <EditTask taskId={taskId} todoId={todoId} />}
       </section>
     </div>
   );
