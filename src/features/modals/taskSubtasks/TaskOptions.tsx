@@ -49,7 +49,7 @@ const TaskOptions = ({
       </p>
       <SubtasksList subtasks={subtasks} todoId={todoId} />
       <SubtasksCurrStatus todoId={todoId} taskId={taskId} />
-      {isSettingsOpen && <TaskSettings taskId={taskId} />}
+      {isSettingsOpen && <TaskSettings taskId={taskId} todoId={todoId} />}
     </div>
   );
 };
