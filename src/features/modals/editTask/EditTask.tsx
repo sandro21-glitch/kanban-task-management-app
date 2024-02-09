@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import EditTitle from "./EditTitle";
 import EditDescription from "./EditDescription";
 import EditSubtasks from "./EditSubtasks";
-import EditStatus from "./EditStatus";
 import { editSubtaskDetails } from "../../board/boardsSlice";
 import { SingleTaskTypes, SubtaskType } from "../../../types/BoardTypes";
 import { openEditTaskModal } from "../modalsSlice";
@@ -79,7 +78,6 @@ const EditTask = ({ taskId, todoId }: EditTaskTypes) => {
             editedSubtasks={editedSubtasks}
             setEditedSubtasks={setEditedSubtasks}
           />
-          <EditStatus />
         </article>
         <SaveBtn />
       </div>
