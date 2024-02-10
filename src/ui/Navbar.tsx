@@ -12,17 +12,27 @@ const Navbar = () => {
     .map((board) => board.name);
   return (
     <nav
-      className={`h-[97px] w-full flex items-center justify-between
+      className={`h-[64px] sm:h-[97px] w-full flex items-center justify-between
        ${
          darkMode ? "bg-darkMode" : "bg-white"
-       } transition-all ease-in duration-150`}
+       } transition-all ease-in duration-150 `}
     >
       <div
-        className={`flex items-center  sm:border-r gap-4 sm:min-w-[300px] ${
-          darkMode ? "border-r-mediumDark" : null
-        } ${!isSidebarOpen ? "border-b" : "border-b-0"} h-full`}
+        className={`flex items-center border border-transparent gap-4 sm:min-w-[300px] 
+        ${
+          isSidebarOpen && darkMode
+            ? " border-r-[#3e3f4e]"
+            : isSidebarOpen && !darkMode
+            ? "border-r-[#e4ebfa]"
+            : !isSidebarOpen && !darkMode
+            ? "border-r-[#e4ebfa] border-b-[#e4ebfa]"
+            : !isSidebarOpen && darkMode
+            ? "border-b-[#3e3f4e] border-r-[#3e3f4e]"
+            : ""
+        }
+         h-full`}
       >
-        <img src={logo} alt="logo" className="ml-5" />
+        <img src={logo} alt="logo" className="ml-5 " />
         <h1
           className={`font-bold text-[2rem] hidden sm:inline ${
             darkMode ? "text-white" : "text-black"
