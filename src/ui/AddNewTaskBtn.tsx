@@ -6,9 +6,10 @@ const AddNewTaskBtn = () => {
   return (
     <button
       onClick={() => dispatch(setNewTaskModal(true))}
-      className="bg-mediumPurple w-[164px] h-[3em] rounded-full text-white font-bold normal-case"
+      className="bg-mediumPurple sm:w-[164px] w-[3em] h-[2em] sm:h-[3em] rounded-full text-white font-bold normal-case"
     >
-      + Add new task
+      <span className="hidden sm:inline">+ Add new task</span>
+      <span className="sm:hidden">+</span>
     </button>
   );
 };
