@@ -18,13 +18,13 @@ const Navbar = () => {
        } transition-all ease-in duration-150`}
     >
       <div
-        className={`flex items-center border-r gap-4 min-w-[300px] ${
+        className={`flex items-center  sm:border-r gap-4 sm:min-w-[300px] ${
           darkMode ? "border-r-mediumDark" : null
-        } ${!isSidebarOpen ? 'border-b' : 'border-b-0'} h-full`}
+        } ${!isSidebarOpen ? "border-b" : "border-b-0"} h-full`}
       >
         <img src={logo} alt="logo" className="ml-5" />
         <h1
-          className={`font-bold text-[2rem] ${
+          className={`font-bold text-[2rem] hidden sm:inline ${
             darkMode ? "text-white" : "text-black"
           }`}
         >
@@ -39,7 +39,7 @@ const Navbar = () => {
         {boards.length < 1 ? null : (
           <ul className="flex items-center justify-between w-full mx-5 ">
             <li
-              className={`text-[1.5rem] font-bold ${
+              className={`text-[1.2rem] sm:text-[1.5rem] font-bold ${
                 darkMode ? "text-white" : "text-black"
               }`}
             >
