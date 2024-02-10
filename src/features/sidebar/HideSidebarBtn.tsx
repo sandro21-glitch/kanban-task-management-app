@@ -10,7 +10,7 @@ const HideSidebarBtn = () => {
       onClick={() => dispatch(setSidebar())}
       className={`${
         darkMode ? "hover:bg-white" : "hover:bg-hoverGray"
-      } w-[90%] pl-5 flex
+      } hidden w-[90%] pl-5 sm:flex
       items-center justify-start gap-5 py-[1rem] font-bold
        text-lightGray hover:text-mediumPurple
         rounded-r-full transition-all ease-in duration-150 cursor-pointer`}
