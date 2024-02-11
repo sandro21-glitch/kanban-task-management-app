@@ -4,7 +4,7 @@ import Navbar from "./ui/Navbar";
 
 function App() {
   return (
-    <main className="relative">
+    <main>
       <Navbar />
       <Home />
       <Modals />
