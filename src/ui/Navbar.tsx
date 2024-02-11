@@ -1,10 +1,12 @@
-import { useAppSelector } from "../hooks/reduxHooks";
+import { setSidebar } from "../features/popups/popupSlice";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import AddNewTaskBtn from "./AddNewTaskBtn";
 import BoardControls from "./BoardControls";
 import logo from "/assets/logo.svg";
 
 const Navbar = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+  const dispatch = useAppDispatch();
   const { isSidebarOpen } = useAppSelector((store) => store.popup);
   const boards = useAppSelector((store) => store.board.boards);
   const activeBoardName = boards
@@ -12,22 +14,23 @@ const Navbar = () => {
     .map((board) => board.name);
   return (
     <nav
-      className={`h-[64px] sm:h-[97px] w-full flex items-center justify-between
+      className={`h-[4rem] sm:h-[6.0625rem] w-full flex items-center justify-between
        ${
          darkMode ? "bg-darkMode" : "bg-white"
-       } transition-all ease-in duration-150 `}
+       } transition-all ease-in duration-150 relative z-[99999]`}
     >
       <div
-        className={`flex items-center border border-transparent gap-4 sm:min-w-[300px] 
+        className={`flex items-center border border-r-transparent border-l-transparent border-t-transparent
+         gap-4 sm:min-w-[300px] 
         ${
           isSidebarOpen && darkMode
-            ? " border-r-[#3e3f4e]"
+            ? " sm:border-r-[#3e3f4e]"
             : isSidebarOpen && !darkMode
-            ? "border-r-[#e4ebfa]"
+            ? "sm:border-r-[#e4ebfa]"
             : !isSidebarOpen && !darkMode
-            ? "border-r-[#e4ebfa] border-b-[#e4ebfa]"
+            ? "sm:border-r-[#e4ebfa] sm:border-b-[#e4ebfa]"
             : !isSidebarOpen && darkMode
-            ? "border-b-[#3e3f4e] border-r-[#3e3f4e]"
+            ? "sm:border-b-[#3e3f4e] sm:border-r-[#3e3f4e]"
             : ""
         }
          h-full`}
@@ -51,9 +54,22 @@ const Navbar = () => {
             <li
               className={`text-[1.2rem] sm:text-[1.5rem] font-bold ${
                 darkMode ? "text-white" : "text-black"
-              }`}
+              } flex items-center gap-2`}
             >
               {activeBoardName}
+              <span
+                className="sm:hidden"
+                onClick={() => dispatch(setSidebar())}
+              >
+                <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    stroke="#635FC7"
+                    stroke-width="2"
+                    fill="none"
+                    d="m1 1 4 4 4-4"
+                  ></path>
+                </svg>
+              </span>
             </li>
             <li className="flex items-center gap-5">
               <AddNewTaskBtn />
