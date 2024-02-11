@@ -8,7 +8,7 @@ const OpenSidebar = () => {
     <button
       onClick={() => dispatch(setSidebar())}
       className="rounded-r-full absolute left-0 bottom-5 z-[99]  bg-mediumPurple p-[1.3rem]
-       flex items-center justify-center"
+       hidden sm:flex items-center justify-center"
     >
       <img src={showSidebar} alt="show sidebar" className="w-5 h-auto" />
     </button>
