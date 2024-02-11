@@ -8,13 +8,13 @@ const Sidebar = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   if (!isSidebarOpen) return <OpenSidebar />;
   return (
-    <aside>
-      <div className="bg-black opacity-50 fixed left-0 top-0 h-full w-full sm:hidden "></div>
+    <aside >
+      <div className="bg-black opacity-50 fixed left-0 top-0 w-full sm:hidden "></div>
       <div
         className={`absolute left-0 right-0 top-5 w-[264px] rounded-lg sm:rounded-none  sm:static mx-auto sm:min-w-sidebarWidth ${
           darkMode ? "bg-darkMode border-r-mediumDark" : "bg-white"
         }
-       sm:min-h-[90vh]  py-5 sm:flex flex-col justify-between 
+       sm:h-full  py-5 sm:flex flex-col justify-between 
        border-r z-[9999]`}
       >
         {/* top side */}
