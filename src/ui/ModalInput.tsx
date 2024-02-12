@@ -27,7 +27,7 @@ const ModalInput = ({
         onChange={(e) => onChange(e.target.value)}
         className={`${
           !value && isSubmited ? "border-red-500" : ""
-        } outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
+        } outline-none border border-borderColor p-2 text-[.9rem] rounded-md w-full ${
           darkMode ? "bg-darkMode text-white" : "bg-white text-black w-full"
         }`}
       />
