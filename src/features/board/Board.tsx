@@ -16,7 +16,7 @@ const Board = () => {
   }
   return (
     <section
-      className={`w-full overflow-x-scroll p-5 flex gap-5 ${
+      className={`w-full overflow-x-scroll mt-10 p-5 flex gap-5 ${
         darkMode ? "bg-boardColorDark" : "bg-boardColor"
       }`}
     >
