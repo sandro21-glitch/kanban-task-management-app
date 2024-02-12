@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { clearBoard } from "../../board/boardsSlice";
+import { clearBoard, selectActiveBoard } from "../../board/boardsSlice";
 import { setOpenClearPopup } from "../modalsSlice";
 
 const ClearBoard = () => {
@@ -10,7 +10,8 @@ const ClearBoard = () => {
     dispatch(clearBoard());
     dispatch(setOpenClearPopup(false));
   };
-
+  const activeBoard = useAppSelector(selectActiveBoard);
+  if (!activeBoard) return null;
   return (
     <div
       className={`w-[90vw] md:w-[45rem] ${
@@ -21,8 +22,8 @@ const ClearBoard = () => {
         Clear this Board?
       </h1>
       <p className="text-[#828fa3] text-[.9rem] mb-5">
-        Are you sure you want to clear the "Example Board 3" board? This action
-        will remove all columns and tasks and cannot be reversed.
+        Are you sure you want to clear the "{activeBoard.name}" board? This
+        action will remove all columns and tasks and cannot be reversed.
       </p>
       <div className="w-full flex items-center gap-5">
         <button
