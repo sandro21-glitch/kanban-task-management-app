@@ -1,14 +1,8 @@
 import Board from "../features/board/Board";
 import Sidebar from "../features/sidebar/Sidebar";
-// (min-width: 640px)
 const Home = () => {
-  const minHeight =
-    window.innerWidth < 640 ? "100vh" : `calc(100vh - ${6.0625 * 16}px)`;
   return (
-    <section
-      style={{ minHeight }}
-      className="flex w-full relative sm:min-h-screen"
-    >
+    <section className="flex w-full absolute bottom-0 top-[1rem] left-0 sm:top-14">
       <Sidebar />
       <Board />
     </section>
