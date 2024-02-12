@@ -1,17 +1,47 @@
 import SidebarTop from "./SidebarTop";
 
-import { useAppSelector } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import OpenSidebar from "./OpenSidebar";
 import SidebarBot from "./SidebarBot";
+import { useEffect, useState } from "react";
+import { setSidebar } from "../popups/popupSlice";
 const Sidebar = () => {
   const { isSidebarOpen } = useAppSelector((store) => store.popup);
   const darkMode = useAppSelector((store) => store.theme.darkMode);
+  const dispatch = useAppDispatch();
+  const [prevIsSmallScreen, setPrevIsSmallScreen] = useState(
+    window.innerWidth <= 640
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newWindowWidth = window.innerWidth;
+      const isSmallScreen = newWindowWidth <= 640;
+      
+      if (isSmallScreen !== prevIsSmallScreen) {
+        setPrevIsSmallScreen(isSmallScreen);
+
+        if (isSmallScreen && isSidebarOpen) {
+          dispatch(setSidebar(false));
+        } else if (!isSmallScreen && !isSidebarOpen) {
+          dispatch(setSidebar(true));
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isSidebarOpen, prevIsSmallScreen, dispatch]);
+
   if (!isSidebarOpen) return <OpenSidebar />;
   return (
-    <aside >
-      <div className="bg-black opacity-50 fixed left-0 top-0 w-full sm:hidden "></div>
+    <aside className="mt-10">
+      <div className="bg-black opacity-50 fixed inset-0 w-full sm:hidden"></div>
       <div
-        className={`absolute left-0 right-0 top-5 w-[264px] rounded-lg sm:rounded-none  sm:static mx-auto sm:min-w-sidebarWidth ${
+        className={`absolute left-0 right-0 top-20 w-[364px] sm:w-[264px] rounded-lg sm:rounded-none sm:static mx-auto sm:min-w-sidebarWidth ${
           darkMode ? "bg-darkMode border-r-mediumDark" : "bg-white"
         }
        sm:h-full  py-5 sm:flex flex-col justify-between 
