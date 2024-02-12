@@ -17,7 +17,7 @@ const TaskDescription = ({
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
         placeholder="e.g. Start learning Things"
-        className={`outline-none border border-borderColor p-2 text-[.9rem] rounded-md ${
+        className={`outline-none border border-borderColor p-2 text-[.9rem] max-h-[10rem] rounded-md ${
           darkMode ? "bg-darkMode text-white" : "bg-white text-black"
         }`}
       ></textarea>
