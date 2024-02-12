@@ -7,7 +7,7 @@ const HideSidebarBtn = () => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   return (
     <button
-      onClick={() => dispatch(setSidebar())}
+      onClick={() => dispatch(setSidebar(false))}
       className={`${
         darkMode ? "hover:bg-white" : "hover:bg-hoverGray"
       } hidden w-[90%] pl-5 sm:flex
