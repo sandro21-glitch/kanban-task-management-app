@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 // import type { RootState } from "../../store";
 
@@ -9,15 +9,15 @@ interface PopupState {
 
 // Define the initial state using that type
 const initialState: PopupState = {
-  isSidebarOpen: true,
+  isSidebarOpen: window.innerWidth > 640,
 };
 
 export const counterSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
-    setSidebar: (state) => {
-      state.isSidebarOpen = !state.isSidebarOpen;
+    setSidebar: (state, action: PayloadAction<boolean>) => {
+      state.isSidebarOpen = action.payload;
     },
   },
 });
