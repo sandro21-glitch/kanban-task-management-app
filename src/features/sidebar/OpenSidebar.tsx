@@ -6,7 +6,7 @@ const OpenSidebar = () => {
 
   return (
     <button
-      onClick={() => dispatch(setSidebar())}
+      onClick={() => dispatch(setSidebar(true))}
       className="rounded-r-full absolute left-0 bottom-5 z-[99]  bg-mediumPurple p-[1.3rem]
        hidden sm:flex items-center justify-center"
     >
