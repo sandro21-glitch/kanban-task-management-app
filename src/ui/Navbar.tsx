@@ -52,14 +52,16 @@ const Navbar = () => {
         {boards.length < 1 ? null : (
           <ul className="flex items-center justify-between w-full mx-5 ">
             <li
-              className={`text-[1.2rem] sm:text-[1.5rem] font-bold ${
+              className={`text-[1.2rem] sm:text-[1.3rem] lg:text-[1.5rem] font-bold ${
                 darkMode ? "text-white" : "text-black"
               } flex items-center gap-2`}
             >
               {activeBoardName}
               <span
-                className="sm:hidden"
-                onClick={() => dispatch(setSidebar())}
+                className={`sm:hidden cursor-pointer ${
+                  isSidebarOpen ? "rotate-180" : "rotate-0"
+                }`}
+                onClick={() => dispatch(setSidebar(!isSidebarOpen))}
               >
                 <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
                   <path
