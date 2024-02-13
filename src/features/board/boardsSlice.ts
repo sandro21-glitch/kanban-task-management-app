@@ -3,52 +3,33 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import { ActiveStatus } from "../modals/addTask/AddNewTask";
 import { v4 as uuidv4 } from "uuid";
-import { BoardState, SingleTaskTypes, TaskType } from "../../types/BoardTypes";
+import {
+  BoardState,
+  SingleBoard,
+  SingleTaskTypes,
+  TaskType,
+} from "../../types/BoardTypes";
 
 const initialState: BoardState = {
-  boards: [
-    {
-      id: 1,
-      name: "Main Board",
-      isActive: true,
-      boardTodos: [
-        {
-          todoName: "Todo",
-          todoId: "98b04129-c264-456f-ba4a-0bbb6a4e276b",
-          todoTasks: [
-            {
-              taskName: "Coffe Break",
-              taskDesc: "learning while drinking",
-              taskId: "1",
-              subtasks: [
-                {
-                  subtaskId: "b014fd92-e968-4976-8a6b-5a6bdebfae75",
-                  subtaskName: "Make Coffe",
-                  isCompleted: false,
-                },
-                {
-                  subtaskId: "d4ea38c4-dfa3-468f-9d1d-48998f48de92",
-                  subtaskName: "Suibtask2",
-                  isCompleted: false,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          todoName: "Doing",
-          todoId: "4282310d-1f0b-449e-9d58-8c11f004f37b",
-          todoTasks: [],
-        },
-      ],
-    },
-  ],
+  boards: [],
 };
 
 export const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
+    fetchNewBoard: (state, action: PayloadAction<SingleBoard[]>) => {
+      action.payload.map((newBoard) => {
+        const existingBoardIndex = state.boards.findIndex(
+          (board) => board.id === newBoard.id
+        );
+        if (existingBoardIndex !== -1) {
+          state.boards[existingBoardIndex] = newBoard;
+        } else {
+          state.boards.push(newBoard);
+        }
+      });
+    },
     addNewBoard: (
       state,
       action: PayloadAction<{ boardName: string; boardCols: string[] }>
@@ -245,6 +226,7 @@ export const {
   deleteTask,
   deleteBoard,
   editSubtaskDetails,
+  fetchNewBoard,
 } = boardSlice.actions;
 
 // selects only the active boards from the Redux state.
