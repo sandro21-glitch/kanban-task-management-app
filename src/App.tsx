@@ -5,6 +5,8 @@ import Navbar from "./ui/Navbar";
 import { useAppDispatch } from "./hooks/reduxHooks";
 import { fetchNewBoard } from "./features/board/boardsSlice";
 import data from "./data.json";
+import "./scrollBarStyles.css";
+
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
