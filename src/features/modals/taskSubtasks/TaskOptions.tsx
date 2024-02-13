@@ -25,7 +25,7 @@ const TaskOptions = ({
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   return (
     <div
-      className={`min-w-[90vw] sm:min-w-[500px] ${
+      className={`w-[90vw] sm:w-[480px] ${
         darkMode ? "bg-darkMode" : "bg-white"
       } p-7 rounded-lg cursor-default relative`}
     >
