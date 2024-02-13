@@ -24,7 +24,7 @@ const Navbar = () => {
          gap-4 sm:min-w-[300px] 
         ${
           isSidebarOpen && darkMode
-            ? " sm:border-r-[#3e3f4e]"
+            ? " sm:border-r-[#3e3f4e] sm:border-b-[#3e3f4e]"
             : isSidebarOpen && !darkMode
             ? "sm:border-r-[#e4ebfa]"
             : !isSidebarOpen && !darkMode
