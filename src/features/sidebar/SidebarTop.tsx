@@ -21,7 +21,7 @@ const SidebarTop = () => {
                 isActive
                   ? "bg-mediumPurple text-white"
                   : "hover:bg-sidebarHover"
-              } rounded-r-full flex items-center gap-5 cursor-pointer group`}
+              } overflow-hidden rounded-r-full flex items-center gap-5 cursor-pointer group`}
             >
               <img src={boardIcon} alt="board icon" className="ml-5 " />
               <h3
