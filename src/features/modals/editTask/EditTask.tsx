@@ -16,7 +16,7 @@ const EditTask = ({ taskId, todoId }: EditTaskTypes) => {
   const darkMode = useAppSelector((store) => store.theme.darkMode);
   const { boards } = useAppSelector((store) => store.board);
   const dispatch = useAppDispatch();
-
+  const [isSubmited, setIsSubmited] = useState(false);
   const activeTodo = boards
     .flatMap((board) => board.boardTodos)
     .find((todo) => todo.todoId === todoId);
@@ -47,6 +47,13 @@ const EditTask = ({ taskId, todoId }: EditTaskTypes) => {
   };
   const handleEditTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isSubNameless = editedSubtasks.some(
+      (subtask) => subtask.subtaskName === ""
+    );
+    setIsSubmited(true);
+    if (!editedTitle || isSubNameless) {
+      return;
+    }
     dispatch(editSubtaskDetails(updatedTask));
     dispatch(openEditTaskModal({ isOpen: false, taskId: "", todoId: "" }));
   };
@@ -67,6 +74,7 @@ const EditTask = ({ taskId, todoId }: EditTaskTypes) => {
         </h3>
         <article>
           <EditTitle
+            isSubmited={isSubmited}
             editedTitle={editedTitle}
             setEditedTitle={setEditedTitle}
           />
@@ -75,6 +83,7 @@ const EditTask = ({ taskId, todoId }: EditTaskTypes) => {
             setEditedDesc={setEditedDesc}
           />
           <EditSubtasks
+            isSubmited={isSubmited}
             editedSubtasks={editedSubtasks}
             setEditedSubtasks={setEditedSubtasks}
           />
