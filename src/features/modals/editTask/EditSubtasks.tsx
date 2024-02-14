@@ -3,15 +3,18 @@ import { v4 as uuidv4 } from "uuid";
 import ModalLabel from "../../../ui/ModalLabel";
 import { SubtaskType } from "../../../types/BoardTypes";
 import iconCross from "/assets/icon-cross.svg";
+import InputError from "../../../ui/InputError";
 
 type EditSubtaskTypes = {
   editedSubtasks: SubtaskType[];
   setEditedSubtasks: React.Dispatch<React.SetStateAction<SubtaskType[]>>;
+  isSubmited: boolean;
 };
 
 const EditSubtasks = ({
   editedSubtasks,
   setEditedSubtasks,
+  isSubmited,
 }: EditSubtaskTypes) => {
   const handleSubtaskChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -29,7 +32,7 @@ const EditSubtasks = ({
     const newSubtask = {
       subtaskName: "",
       subtaskId: uuidv4(),
-      isCompleted: false, // Make sure to include isCompleted
+      isCompleted: false,
     };
     setEditedSubtasks((prevState) => [...prevState, newSubtask]);
   };
@@ -48,12 +51,14 @@ const EditSubtasks = ({
         {editedSubtasks.map((subtask) => {
           const { subtaskId, subtaskName } = subtask;
           return (
-            <div key={subtaskId} className="w-full flex mb-3">
+            <div key={subtaskId} className="w-full flex mb-3 relative">
               <input
                 value={subtaskName}
                 onChange={(e) => handleSubtaskChange(e, subtask.subtaskId)}
                 type="text"
-                className="border outline-none py-2 px-2 rounded-md w-full"
+                className={`${
+                  isSubmited && !subtask.subtaskName ? "border-red-500" : ""
+                } border outline-none py-2 px-2 rounded-md w-full`}
               />
               <button
                 className="ml-5"
@@ -62,6 +67,9 @@ const EditSubtasks = ({
               >
                 <img src={iconCross} alt="icon cross" />
               </button>
+              {isSubmited && !subtask.subtaskName && (
+                <InputError top=".8" text="Can't be empty" />
+              )}
             </div>
           );
         })}
