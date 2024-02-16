@@ -1,4 +1,6 @@
+import DroppableArea from "../../ui/DroppableArea";
 import TaskDetails from "./TaskDetails";
+
 type TodoTasksTypes = {
   todo: {
     todoId: string;
@@ -20,18 +22,20 @@ const TodoTasks = ({ todo }: TodoTasksTypes) => {
   const { todoName, todoTasks, todoId } = todo;
 
   return (
-    <li className="min-w-[17.5em]">
-      <div className="flex gap-2 items-center">
-        <div
-          style={{ backgroundColor: "green" }}
-          className="w-[15px] h-[15px] rounded-full"
-        ></div>
-        <div className="font-bold tracking-[.1rem] text-[.9rem]">
-          {todoName} ({todoTasks.length})
+    <DroppableArea todoId={todoId}>
+      <li className="min-w-[17.5em] ">
+        <div className="flex gap-2 items-center">
+          <div
+            style={{ backgroundColor: "green" }}
+            className="w-[15px] h-[15px] rounded-full"
+          ></div>
+          <div className="font-bold tracking-[.1rem] text-[.9rem]">
+            {todoName} ({todoTasks.length})
+          </div>
         </div>
-      </div>
-      <TaskDetails todoTasks={todoTasks} todoId={todoId} />
-    </li>
+        <TaskDetails todoTasks={todoTasks} todoId={todoId} />
+      </li>
+    </DroppableArea>
   );
 };
 
