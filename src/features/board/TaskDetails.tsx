@@ -13,30 +13,31 @@ type TaskDetailsTypes = {
   }[];
   todoId: string;
 };
+
 const TaskDetails = ({ todoTasks, todoId }: TaskDetailsTypes) => {
   if (todoTasks.length === 0) return null;
+
   return (
-    <>
+    <div>
       {todoTasks.map((task, index) => {
         const { taskName, subtasks, taskDesc, taskId } = task;
-        // Filter completed subtasks
-        const completedSubtasks = subtasks.filter(
-          (subtask) => subtask.isCompleted
-        );
+
         return (
           <SingelTask
             key={index}
             todoId={todoId}
             taskName={taskName}
             taskId={taskId}
-            completedLength={completedSubtasks.length}
+            completedLength={
+              subtasks.filter((subtask) => subtask.isCompleted).length
+            }
             subtasksLength={subtasks.length}
             subtasks={subtasks}
             taskDesc={taskDesc}
           />
         );
       })}
-    </>
+    </div>
   );
 };
 
