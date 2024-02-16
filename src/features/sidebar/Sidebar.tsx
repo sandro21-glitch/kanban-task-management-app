@@ -17,7 +17,7 @@ const Sidebar = () => {
     const handleResize = () => {
       const newWindowWidth = window.innerWidth;
       const isSmallScreen = newWindowWidth <= 640;
-      
+
       if (isSmallScreen !== prevIsSmallScreen) {
         setPrevIsSmallScreen(isSmallScreen);
 
