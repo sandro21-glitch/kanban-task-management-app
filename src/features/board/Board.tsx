@@ -1,3 +1,5 @@
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import BoardColumns from "./BoardColumns";
 import AddNewColumnBtn from "./AddNewColumnBtn";
@@ -23,10 +25,10 @@ const Board = () => {
       {boards.length < 1 ? (
         <NoBoards />
       ) : (
-        <>
+        <DndProvider backend={HTML5Backend}>
           <BoardColumns />
           <AddNewColumnBtn />
-        </>
+        </DndProvider>
       )}
     </section>
   );
