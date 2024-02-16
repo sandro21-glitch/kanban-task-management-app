@@ -20,18 +20,12 @@ const Navbar = () => {
        } transition-all ease-in duration-150 relative z-[99999]`}
     >
       <div
-        className={`flex items-center border border-b-[#3e3f4e] border-r-transparent border-l-transparent border-t-transparent
-         gap-4 sm:min-w-[300px] 
+        className={`flex items-center 
+         gap-4 sm:min-w-[300px] border border-transparent 
         ${
-          isSidebarOpen && darkMode
-            ? " sm:border-r-[#3e3f4e] "
-            : isSidebarOpen && !darkMode
-            ? "sm:border-r-[#e4ebfa]"
-            : !isSidebarOpen && !darkMode
-            ? "sm:border-r-[#e4ebfa] sm:border-b-[#e4ebfa]"
-            : !isSidebarOpen && darkMode
-            ? "sm:border-b-[#3e3f4e] sm:border-r-[#3e3f4e]"
-            : ""
+          darkMode
+            ? "sm:border-r-[#FFFFFF21]  border-b-[#FFFFFF21]"
+            : "sm:border-r-[#E4EBFA] border-b-[#E4EBFA]"
         }
          h-full`}
       >
