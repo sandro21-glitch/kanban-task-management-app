@@ -210,6 +210,48 @@ export const boardSlice = createSlice({
         }
       }
     },
+    dragTodos: (
+      state,
+      action: PayloadAction<{ todoId: string; taskId: string }>
+    ) => {
+      const { todoId, taskId } = action.payload;
+      const activeBoard = state.boards.find((board) => board.isActive);
+
+      if (activeBoard) {
+        const matchingTask = activeBoard.boardTodos
+          .flatMap((column) => column.todoTasks)
+          .find((task) => task.taskId === taskId);
+
+        // remove the task from all columns
+        activeBoard.boardTodos.forEach((todoCol) => {
+          todoCol.todoTasks = todoCol.todoTasks.filter(
+            (todoTask) => todoTask.taskId !== taskId
+          );
+        });
+
+        if (matchingTask) {
+          const dropItem: TaskType = {
+            taskName: matchingTask?.taskName,
+            taskDesc: matchingTask?.taskDesc,
+            taskId: matchingTask?.taskId,
+            subtasks:
+              matchingTask.subtasks.map((sub) => ({
+                subtaskId: sub.subtaskId,
+                subtaskName: sub.subtaskName,
+                isCompleted: sub.isCompleted,
+              })) || [],
+          };
+          // add the dropItem to the specified todoId
+          const destinationColumn = activeBoard.boardTodos.find(
+            (todoCol) => todoCol.todoId === todoId
+          );
+
+          if (destinationColumn) {
+            destinationColumn.todoTasks.push(dropItem);
+          }
+        }
+      }
+    },
   },
 });
 
@@ -227,6 +269,7 @@ export const {
   deleteBoard,
   editSubtaskDetails,
   fetchNewBoard,
+  dragTodos,
 } = boardSlice.actions;
 
 // selects only the active boards from the Redux state.
