@@ -10,7 +10,7 @@ const BoardNoCols = () => {
         darkMode ? "bg-boardColorDark" : "bg-white"
       } w-full h-[90vh] flex flex-col gap-5 justify-center items-center`}
     >
-      <h3 className="text-lightGray font-bold mb-5">
+      <h3 className="text-lightGray text-center font-bold mb-5">
         This board is empty. Create a new column to get started.
       </h3>
       <button
