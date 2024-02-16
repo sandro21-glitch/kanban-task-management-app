@@ -1,3 +1,4 @@
+import { useDrag } from "react-dnd";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setOpenTaskOptions } from "../modals/modalsSlice";
 
@@ -32,8 +33,15 @@ const SingelTask = ({
   const handleOpenTaskOptions = () => {
     dispatch(setOpenTaskOptions({ isOpen: true, task }));
   };
+  const [{ isDragging }, drag] = useDrag({
+    type: "SINGLE_TASK",
+    item: { taskId },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
   return (
-    <div>
+    <div ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }}>
       <div
         onClick={handleOpenTaskOptions}
         className={`w-[280px] ${
