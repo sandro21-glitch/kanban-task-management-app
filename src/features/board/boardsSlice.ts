@@ -216,30 +216,30 @@ export const boardSlice = createSlice({
     ) => {
       const { todoId, taskId } = action.payload;
       const activeBoard = state.boards.find((board) => board.isActive);
-    
+
       if (activeBoard) {
         const matchingTask = activeBoard.boardTodos
           .flatMap((column) => column.todoTasks)
           .find((task) => task.taskId === taskId);
-    
+
         if (matchingTask) {
-          const currentColumnId = activeBoard.boardTodos.find(
-            (col) => col.todoTasks.some((task) => task.taskId === taskId)
+          const currentColumnId = activeBoard.boardTodos.find((col) =>
+            col.todoTasks.some((task) => task.taskId === taskId)
           )?.todoId;
-    
+
           if (currentColumnId !== todoId) {
-            // Remove the task from all columns
+            // remove the task from all columns
             activeBoard.boardTodos.forEach((todoCol) => {
               todoCol.todoTasks = todoCol.todoTasks.filter(
                 (todoTask) => todoTask.taskId !== taskId
               );
             });
-    
+
             // Add the task to the specified todoId if it's not the same column
             const destinationColumn = activeBoard.boardTodos.find(
               (todoCol) => todoCol.todoId === todoId
             );
-    
+
             if (destinationColumn) {
               destinationColumn.todoTasks.push(matchingTask);
             }
@@ -247,7 +247,6 @@ export const boardSlice = createSlice({
         }
       }
     },
-    
   },
 });
 
