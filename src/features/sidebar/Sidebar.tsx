@@ -14,6 +14,13 @@ const Sidebar = () => {
     window.innerWidth <= 640
   );
   const sidebarRef = useRef(null);
+
+  useOutsideClick(sidebarRef, () => {
+    if (isSidebarOpen && prevIsSmallScreen) {
+      dispatch(setSidebar(false));
+    }
+  });
+
   useEffect(() => {
     const handleResize = () => {
       const newWindowWidth = window.innerWidth;
@@ -29,22 +36,11 @@ const Sidebar = () => {
         }
       }
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isSidebarOpen, prevIsSmallScreen, dispatch]);
-
-  const closeSidebar = () => {
-    if (isSidebarOpen) {
-      dispatch(setSidebar(false));
-    }
-  };
-
-  // Close sidebar when clicking outside
-  useOutsideClick(sidebarRef, closeSidebar);
 
   if (!isSidebarOpen) return <OpenSidebar />;
   return (
