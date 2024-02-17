@@ -9,11 +9,11 @@ const BoardColumns = () => {
   const { boardTodos } = activeBoard;
 
   return (
-    <ul className="flex gap-7 text-lightGray">
+    <article className="flex gap-7 text-lightGray">
       {boardTodos.map((todo) => (
         <TodoTasks key={todo.todoId} todo={todo} />
       ))}
-    </ul>
+    </article>
   );
 };
 
