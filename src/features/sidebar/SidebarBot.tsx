@@ -11,7 +11,7 @@ const SidebarBot = () => {
     <div>
       <div
         className={`flex items-center justify-center
-         gap-5 sm:mb-5 ${
+         gap-5 mt-5 sm:mb-5 ${
            darkMode ? "bg-boardColorDark" : "bg-hoverGray"
          } bg-boardColor py-[.9rem] max-w-[90%] mx-auto rounded-lg`}
       >
